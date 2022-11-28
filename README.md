@@ -10,18 +10,18 @@ Uncompress it :
     bc binfmt-support bzip2 fakeroot gcc gcc-arm-linux-gnueabihf git gnupg make parted rsync qemu-user-static wget xz-utils zip debootstrap sudo dirmngr bison flex libssl-dev kmod
     
 ## 3. Acces the USB Armory as a storage device
-#A) Set the switch on uSd without any uSd card pluged in.
+# A) Set the switch on uSd without any uSd card pluged in.
 
-#B) Download the armory-ums
+# B) Download the armory-ums
 [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases)
 
-#C) Set up the armory-boot tool
+# C) Set up the armory-boot tool
 git clone the armory-boot tool :
 
     git clone https://github.com/usbarmory/armory-boot
     cd armory-boot && make armory-boot-usb
     
-#D) Finish the process
+# D) Finish the process
 Move the .imx file into the armory-boot repository.
 
 Execute the command below:
