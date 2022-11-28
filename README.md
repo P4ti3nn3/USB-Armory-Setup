@@ -1,38 +1,38 @@
-## 1. Download the image
+# 1. Download the image
 Debian base image [here](https://github.com/usbarmory/usbarmory-debian-base_image/releases/tag/20221114).
 
 Uncompress it :
 
     sudo xz -d <image.xz>
 
-## 2. Get all prerequies
+# 2. Get all prerequies
 
     bc binfmt-support bzip2 fakeroot gcc gcc-arm-linux-gnueabihf git gnupg make parted rsync qemu-user-static wget xz-utils zip debootstrap sudo dirmngr bison flex libssl-dev kmod
     
-## 3. Acces the USB Armory as a storage device
-# A) Set the switch on uSd without any uSd card pluged in.
+# 3. Acces the USB Armory as a storage device
+## A) Set the switch on uSd without any uSd card pluged in.
 
-# B) Download the armory-ums
+## B) Download the armory-ums
 [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases)
 
-# C) Set up the armory-boot tool
+## C) Set up the armory-boot tool
 git clone the armory-boot tool :
 
     git clone https://github.com/usbarmory/armory-boot
     cd armory-boot && make armory-boot-usb
     
-# D) Finish the process
+## D) Finish the process
 Move the .imx file into the armory-boot repository.
 
 Execute the command below:
 
     sudo armory-boot-usb -i armory-ums.imx
     
-## 4. Load the image on the USB Armory
+# 4. Load the image on the USB Armory
 
     sudo dd if=usbarmory-mark-two-emmc-debian_bullseye-base_image-20221114.raw of=/dev/sdb bs=1M conv=fsync
 
-## 5. Acces the key
+# 5. Acces the key
 Set back the switch on the internal storage.
 
 Connect the key via ssh:
@@ -41,3 +41,4 @@ Connect the key via ssh:
     
 with the password "usbarmory".
     
+# 6. Enable an internet access
