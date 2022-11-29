@@ -35,6 +35,8 @@ Execute the command below:
 
     sudo dd if=<image.raw> of=/dev/<sdX> bs=1M conv=fsync
 
+It can take a few minutes.
+
 # 5. Acces the key
 Set back the switch on the internal storage.
 
