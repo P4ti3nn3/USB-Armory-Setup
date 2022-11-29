@@ -1,5 +1,8 @@
+# Before starting
+This repository is an unofficial tutorial for helping to setup an [USB Armory Mk II](https://github.com/usbarmory/usbarmory/wiki/Mk-II-Introduction).
+
 # 1. Download the image
-Debian base image [here](https://github.com/usbarmory/usbarmory-debian-base_image/releases/tag/20221114).
+Debian base image [here](https://github.com/usbarmory/usbarmory/wiki/Available-images).
 
 Uncompress it :
 
@@ -16,7 +19,7 @@ Uncompress it :
 [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases)
 
 ## C) Set up the armory-boot tool
-git clone the armory-boot tool :
+git clone the armory-boot tool and compil it:
 
     git clone https://github.com/usbarmory/armory-boot
     cd armory-boot && make armory-boot-usb
@@ -30,7 +33,7 @@ Execute the command below:
     
 # 4. Load the image on the USB Armory
 
-    sudo dd if=usbarmory-mark-two-emmc-debian_bullseye-base_image-20221114.raw of=/dev/sdb bs=1M conv=fsync
+    sudo dd if=<image.raw> of=/dev/<sdX> bs=1M conv=fsync
 
 # 5. Acces the key
 Set back the switch on the internal storage.
