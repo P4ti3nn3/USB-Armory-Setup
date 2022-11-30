@@ -16,7 +16,7 @@ Uncompress it :
 ## A) Set the switch on uSd without any uSd card pluged in.
 
 ## B) Download the armory-ums
-[armory-ums.imx](https://github.com/usbarmory/armory-ums/releases)
+The [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases) file.
 
 ## C) Set up the armory-boot tool
 git clone the armory-boot tool and compil it:
