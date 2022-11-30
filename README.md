@@ -89,52 +89,6 @@ Now on the USB, ping internet for confirm that the conf is working:
     ping 8.8.8.8
     
 If it works, the base configuration is over, else restart your network or check your configuration.
-
-# {
-# 7. Scan an USB when it's plug
-## A) Update/upgrade your USB
-
-    apt-get -y update
-    
-    apt-get -y upgrade
-    
-    apt-get install software-properties-common build-essential curl -y
-
-## B) Download ClamAv on the USB
-Follow this commands:
-
-    #become root
-    sudo su -
-    
-    #dowload ClamAv daemon
-    apt-get install clamav clamav-daemon
-    
-    #start the daemon
-    systemctl start clamav-daemon
-
-check that it works:
-
-    #check the status
-    systemctl status clamav-daemon
-    
-If status is failed, else skip this part:
-
-go to :
-
-    database.clamav.net/main.cvd
-    database.clamav.net/daily.cvd
-    
-or download it [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/cvd).
-    
-Put this two files in /var/lib/clamav and restart
-
-    systemctl stop clamav-daemon
-    
-    systemctl start clamav-daemon
-    
-## C) Create a script
-
-# }   
    
     
         
