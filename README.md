@@ -47,6 +47,7 @@ locate the USB armory and replace the sdX below with it :
 It can take a few minutes.
 
 Set back the switch on the internal storage.
+
 ![image](https://user-images.githubusercontent.com/115619908/204820264-d00449f2-79b2-4acd-8f75-162b4ad24212.png)
 
 # 5. Enable an internet access
@@ -89,7 +90,7 @@ Now on the USB, ping internet for confirm that the conf is working:
     
 If it works, the base configuration is over, else restart your network or check your configuration.
 
-#{
+# {
 # 7. Scan an USB when it's plug
 ## A) Update/upgrade your USB
 
@@ -133,7 +134,7 @@ Put this two files in /var/lib/clamav and restart
     
 ## C) Create a script
 
-#}   
+# }   
    
     
         
