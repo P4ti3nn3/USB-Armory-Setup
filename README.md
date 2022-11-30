@@ -29,17 +29,25 @@ git clone the armory-boot tool and compil it:
 ## D) Finish the process
 Move the .imx file into the armory-boot repository.
 
+    mv <file.imx> <armory-boot location>
+
 Execute the command below:
 
     sudo armory-boot-usb -i armory-ums.imx
     
 # 4. Load the image on the USB Armory
+With the command :
+
+    fdisk -l
+
+locate the USB armory and replace the sdX below with it :
 
     sudo dd if=<image.raw> of=/dev/<sdX> bs=1M conv=fsync
 
 It can take a few minutes.
 
 Set back the switch on the internal storage.
+![image](https://user-images.githubusercontent.com/115619908/204820264-d00449f2-79b2-4acd-8f75-162b4ad24212.png)
 
 # 5. Enable an internet access
 On your host:
@@ -66,7 +74,6 @@ You can now, in a terminal, execute this commands with your conf (do ip addr for
     # enable IP forwarding
     echo 1 > /proc/sys/net/ipv4/ip_forward
 
-
 # 6. Acces the key
 Connect the key via ssh:
 
@@ -80,8 +87,9 @@ Now on the USB, ping internet for confirm that the conf is working:
 
     ping 8.8.8.8
     
-If it works, the base configuration is over, else, you may have made a mistake.
+If it works, the base configuration is over, else restart your network or check your configuration.
 
+#{
 # 7. Scan an USB when it's plug
 ## A) Update/upgrade your USB
 
@@ -125,7 +133,7 @@ Put this two files in /var/lib/clamav and restart
     
 ## C) Create a script
 
-    
+#}   
    
     
         
