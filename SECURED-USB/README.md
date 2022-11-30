@@ -44,26 +44,28 @@ Put this two files in /var/lib/clamav and restart
 # 3) Create a script
 On /home/usbarmory execute :
 
-  nano scan.sh
+    nano scan.sh
   
 and then enter the following code :
 
-  #!/bin/bash
-  clamscan /dev/sdb
+    #!/bin/bash
+    clamscan /dev/sdb
   
 Execute the following line for giving the proper rights to the script
 
-  chmod 755 scan.sh
+    chmod 755 scan.sh
   
 # 4) Automatise the execution of the script when USB is plugged
 In /etc/udev/rules.d do :
 
-  nano 90-usb.rules
+    nano 90-usb.rules
   
 and write :
 
-  ACTION=="add", ATTRS{idVendor}=="****", ATTRS{idProduct}=="****", RUN+="/home/usbarmory/scan.sh"
+    ACTION=="add", ATTRS{idVendor}=="****", ATTRS{idProduct}=="****", RUN+="/home/usbarmory/scan.sh"
   
  Then restart udev :
  
-  sudo service udev restart
+    sudo service udev restart
+
+Now when a USB is plugged, the Armory will scan it.
