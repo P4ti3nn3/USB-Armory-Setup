@@ -37,13 +37,50 @@ Execute the command below:
 
 It can take a few minutes.
 
-# 5. Acces the key
 Set back the switch on the internal storage.
 
+# 5. Enable an internet access
+On your host:
+
+In the file /etc/modules, add the line:
+
+    g_ether
+    
+In the file /etc/modprobe.d/usbarmory.conf, add the line:
+
+    options g_ether use_eem=0 dev_addr=aa:bb:cc:dd:ee:f1 host_addr=aa:bb:cc:dd:ee:f2
+    
+You can now, in a terminal, execute this commands with your conf (do ip addr for information about your conf):
+
+    # bring the USB virtual Ethernet interface up
+    /sbin/ip link set <ethernet interface of the USB> up
+    
+    # set the host IP address
+    /sbin/ip addr add 10.0.0.2/24 dev <ethernet interface of the USB>
+    
+    # enable masquerading for outgoing connections towards wireless interface
+    /sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o <wireless interface of the host> -j MASQUERADE
+    
+    # enable IP forwarding
+    echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+# 6. Acces the key
 Connect the key via ssh:
 
     ssh usbarmory@10.0.0.1
     
 with the password "usbarmory".
+
+If a message pop up, follow the instructions.
+
+Now on the USB, ping internet for confirm that the conf is working:
+
+    ping 8.8.8.8
     
-# 6. Enable an internet access
+If it works, the base configuration is over, else, you may have made a mistake.
+
+# 7. Scan an USB when it's plug
+
+    
+
