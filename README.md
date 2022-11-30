@@ -108,8 +108,12 @@ check that it works:
     
 If status is failed, else skip this part:
 
-    go to database.clamav.net/main.cvd
-    go to database.clamav.net/daily.cvd
+go to :
+
+    database.clamav.net/main.cvd
+    database.clamav.net/daily.cvd
+    
+or download it [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/cvd).
     
 Put this two files in /var/lib/clamav and restart
 
