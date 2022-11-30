@@ -14,6 +14,8 @@ Uncompress it :
     
 # 3. Acces the USB Armory as a storage device
 ## A) Set the switch on uSd without any uSd card pluged in.
+![image](https://user-images.githubusercontent.com/115619908/204819286-eadf91fa-6218-4c4e-9a7e-ac1a31a585d9.png)
+
 
 ## B) Download the armory-ums
 The [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases) file.
