@@ -81,6 +81,47 @@ Now on the USB, ping internet for confirm that the conf is working:
 If it works, the base configuration is over, else, you may have made a mistake.
 
 # 7. Scan an USB when it's plug
+## A) Update/upgrade your USB
 
+    apt-get -y update
+    
+    apt-get -y upgrade
+    
+    apt-get install software-properties-common build-essential curl -y
+
+## B) Download ClamAv on the USB
+Follow this commands:
+
+    #become root
+    sudo su -
+    
+    #dowload ClamAv daemon
+    apt-get install clamav clamav-daemon
+    
+    #start the daemon
+    systemctl start clamav-daemon
+
+check that it works:
+
+    #check the status
+    systemctl status clamav-daemon
+    
+If status is failed, else skip this part:
+
+    go to database.clamav.net/main.cvd
+    go to database.clamav.net/daily.cvd
+    
+Put this two files in /var/lib/clamav and restart
+
+    systemctl stop clamav-daemon
+    
+    systemctl start clamav-daemon
+    
+## C) Create a script
+
+    
+   
+    
+        
     
 
