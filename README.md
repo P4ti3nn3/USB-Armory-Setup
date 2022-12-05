@@ -81,6 +81,12 @@ For exemple, mine is :
     /sbin/ip addr add 10.0.0.2/24 dev enx1a5589a26942
     sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o wlp2s0 -j MASQUERADE
     echo 1 > /proc/sys/net/ipv4/ip_forward
+    
+And ifconfig -a show :
+
+![Capture d’écran_2022-12-05_14-22-19](https://user-images.githubusercontent.com/115619908/205647771-f5528805-8591-4f2b-890d-3fb05f38901b.png)
+
+
 
 # 6. Acces the key
 Connect the key via ssh:
