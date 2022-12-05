@@ -103,7 +103,7 @@ Now on the USB, ping internet for confirm that the conf is working:
     
 If it works, the base configuration is over, else restart your network or check your configuration.
 
-# 7. Resize the size
+# 7. Resize the storage
 While on the Armory, do :
     
     ls /dev/mmcblk*
