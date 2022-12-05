@@ -89,6 +89,31 @@ Now on the USB, ping internet for confirm that the conf is working:
     ping 8.8.8.8
     
 If it works, the base configuration is over, else restart your network or check your configuration.
+
+# 7. Resize the size
+While on the Armory, do :
+    
+    ls /dev/mmcblk*
+    
+You should have a result like "/dev/mmcblk1" so you can do :
+
+    fdisk /dev/mmcblk1
+    
+Then enter "p" and keep in mind the start of the partition.
+
+Now, enter this in order : 
+
+    d
+    n
+    <enter>
+    <start of the partition>
+    <enter>
+    yes
+    w
+    
+It's over, the storage has been resized.
+
+
    
     
         
