@@ -113,8 +113,16 @@ Now, enter this in order :
     
 It's over, the storage has been resized.
 
+# 8. Final details
+Update your Armory : 
 
-   
+    apt update
+    
+Upgrade your Armory : 
+
+    apt upgrade
+    
+You're done for the basic configuration of the USB Armory.
     
         
     
