@@ -74,6 +74,13 @@ You can now, in a terminal, execute this commands with your conf (do ip addr for
     
     # enable IP forwarding
     echo 1 > /proc/sys/net/ipv4/ip_forward
+    
+For exemple, mine is :
+    
+    /sbin/ip link set enx1a5589a26942 up
+    /sbin/ip addr add 10.0.0.2/24 dev enx1a5589a26942
+    sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o wlp2s0 -j MASQUERADE
+    echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # 6. Acces the key
 Connect the key via ssh:
