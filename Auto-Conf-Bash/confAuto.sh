@@ -1,4 +1,5 @@
 #!/bin/bash
+read -n 1 -p "If root <Enter>, else <Ctrl+C>" mainmeinput
 sudo chmod 700 ./confFiles/1AsUSB.sh
 ./confFiles/1AsUSB.sh
 sudo chmod 700 ./confFiles/2LoadImage.sh
