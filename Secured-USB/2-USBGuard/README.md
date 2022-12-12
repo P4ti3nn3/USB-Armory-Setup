@@ -41,4 +41,4 @@ And then :
 
     sudo systemctl restart usbguard
     
-For more personalized rules, the Github of USBGuard is available [here](https://usbguard.github.io/documentation/rule-language.html)
+For more personalized rules, the Github of USBGuard is available [here](https://usbguard.github.io/documentation/rule-language.html).
