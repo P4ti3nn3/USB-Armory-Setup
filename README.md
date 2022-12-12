@@ -14,7 +14,7 @@ Uncompress it :
     
 # 3. Acces the USB Armory as a storage device
 ## A) Set the switch on uSd without any uSd card pluged in.
-![image](https://user-images.githubusercontent.com/115619908/204819286-eadf91fa-6218-4c4e-9a7e-ac1a31a585d9.png)
+![uSd](https://user-images.githubusercontent.com/115619908/207088072-c9b82a70-e9fe-4610-a2cc-1eaa0ef9ad35.png)
 
 
 ## B) Download the armory-ums
@@ -48,7 +48,7 @@ It can take a few minutes.
 
 Set back the switch on the internal storage.
 
-![image](https://user-images.githubusercontent.com/115619908/204820264-d00449f2-79b2-4acd-8f75-162b4ad24212.png)
+![internal](https://user-images.githubusercontent.com/115619908/207088122-b42e1c15-9156-49a5-be71-34e409257af8.png)
 
 # 5. Enable an internet access
 On your host:
