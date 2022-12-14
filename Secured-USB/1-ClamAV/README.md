@@ -33,7 +33,7 @@ First of all, create the file that is gonna be the SWAP part. :
     #apply swappiness
     sysctl -p
     
-(For this part, this [article](https://forum.hestiacp.com/t/clamav-on-vps-2gb-ram/3536/3) was realy helful.)
+(For this part, this [article](https://forum.hestiacp.com/t/clamav-on-vps-2gb-ram/3536/3) was realy helpful.)
 
 # 3) Download ClamAv on the USB
 Follow this commands:
