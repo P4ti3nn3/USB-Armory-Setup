@@ -1,6 +1,8 @@
 # Before starting
 This repository is an unofficial tutorial for helping to setup an [USB Armory Mk II](https://github.com/usbarmory/usbarmory/wiki/Mk-II-Introduction).
 
+![image](https://user-images.githubusercontent.com/115619908/207642407-f5ec6bdf-2e18-43d2-87e6-19d4cea08ea1.png)
+
 # 1. Download the image
 Debian base image [here](https://github.com/usbarmory/usbarmory/wiki/Available-images).
 
