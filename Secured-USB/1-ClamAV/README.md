@@ -75,7 +75,7 @@ On /home/usbarmory execute :
 and then enter the following code :
 
     #!/bin/bash
-    clamscan /dev/sdb
+    clamscan /dev/sda
   
 Execute the following line for giving the proper rights to the script
 
@@ -88,7 +88,7 @@ In /etc/udev/rules.d do :
   
 and write :
 
-    ACTION=="add", ATTRS{idVendor}=="****", ATTRS{idProduct}=="****", RUN+="/home/usbarmory/scan.sh"
+    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[!0-9]", RUN+="/home/usbarmory/scan.sh"
   
  Then restart udev :
  
