@@ -1,7 +1,25 @@
 # Before starting
 This part is a tutorial for automatise the scan of any USB on the armory
 
-# 1) Update/upgrade your USB
+# Prerequisite
+Before starting, you need to set the mounting point of your USB.
+
+First, find your USB key with:
+
+    fdisk -l
+    
+It will be name "sda" or "sdb"
+
+After this, create the location witch:
+
+    mkdir /media/<name of user>
+    mkdir /media/<name of user>/<name of usb>
+    
+And then, you can mount your key:
+
+    sudo mount /dev/<name of key>1 /media/<name of user>/<name of usb>
+
+# 1) Update/upgrade your USB armory
 
     apt-get -y update
     
@@ -75,7 +93,7 @@ On /home/usbarmory execute :
 and then enter the following code :
 
     #!/bin/bash
-    clamscan /dev/sda
+    clamscan /media/<name of user>/<name of usb>
   
 Execute the following line for giving the proper rights to the script
 
