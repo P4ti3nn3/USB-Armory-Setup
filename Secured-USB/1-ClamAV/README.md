@@ -100,7 +100,7 @@ On /home/usbarmory execute :
 and then enter the following code :
 
     #!/bin/bash
-    clamscan /media/<name of user>/<name of usb>
+    clamscan /mnt/usb/<name of usb>
   
 Execute the following line for giving the proper rights to the script
 
