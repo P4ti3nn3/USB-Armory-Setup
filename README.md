@@ -135,9 +135,9 @@ Unplug the Armory and re-plug it.
 
 Finally, we need to expend the file systeme :
 
-    sudo /dev/mmcblk1p1
+    sudo fsck /dev/mmcblk1p1
     
-    resize2fs /dev/mmcblk1p1
+    sudo resize2fs /dev/mmcblk1p1
     
 It's over, the storage has been resized.
 
