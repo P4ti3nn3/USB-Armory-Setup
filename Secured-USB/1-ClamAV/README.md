@@ -12,12 +12,19 @@ It will be name "sda" or "sdb"
 
 After this, create the location witch:
 
-    mkdir /media/<name of user>
-    mkdir /media/<name of user>/<name of usb>
+    mkdir /mnt
+    mkdir /mnt/usb
     
 And then, you can mount your key:
 
-    sudo mount /dev/<name of key>1 /media/<name of user>/<name of usb>
+    sudo mount /dev/<name of key>1 /mnt/usb
+    
+You can automatise this process by adding a new rule in "/etc/udev/rules.d":
+
+    nano 90-usb.rules
+    
+    <add the line below>
+    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[!0-9]", RUN+="/usr/bin/mount /dev/sd[!0-9]1 /mnt/usb"
 
 # 1) Update/upgrade your USB armory
 
