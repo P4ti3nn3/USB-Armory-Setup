@@ -30,7 +30,34 @@ Then restart udev:
     
 If after this, it doesn't work, then, in `/lib/systemd/system`, modify the file named `systemd-udevd.service` by replacing the [Service] part with :
 
+    DeviceAllow=block-* rwm
+    DeviceAllow=char-* rwm
+    Type=notify
+    # Note that udev will reset the value internally for its workers
+    OOMScoreAdjust=-1000
+    Sockets=systemd-udevd-control.socket systemd-udevd-kernel.socket
+    Restart=always
+    RestartSec=0
+    ExecStart=/lib/systemd/systemd-udevd
+    ExecReload=udevadm control --reload --timeout 0
+    #KillMode=mixed
+    #TasksMax=infinity
+    PrivateMounts=yes
+    ProtectClock=yes
+    ProtectHostname=yes
+    #MemoryDenyWriteExecute=yes
+    #RestrictAddressFamilies=AF_UNIX AF_NETLINK AF_INET AF_INET6
+    #RestrictRealtime=yes
+    RestrictSUIDSGID=yes
+    LockPersonality=yes
+    IPAddressDeny=any
+    #WatchdogSec=3min
 
+And then in the terminal:
+
+    systemctl daemon-reload
+    systemctl restart systemd-udevd.service
+    systemctl restart udev
 
 # 1) Update/upgrade your USB armory
 
