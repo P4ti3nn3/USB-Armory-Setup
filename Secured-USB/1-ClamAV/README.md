@@ -25,6 +25,14 @@ You can automatise this process by adding a new rule in "/etc/udev/rules.d":
     
     <add the line below>
     SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[!0-9]", RUN+="/usr/bin/mount /dev/sd[!0-9]1 /mnt/usb"
+    
+Then restart udev:
+
+    sudo systemctl restart udev
+    
+If after this, it doesn't work, then, in `/lib/systemd/system`, modify the file named `systemd-udevd.service` by replacing the [Service] part with :
+
+
 
 # 1) Update/upgrade your USB armory
 
@@ -120,3 +128,4 @@ and write :
     sudo service udev restart
 
 Now when a USB is plugged, the Armory will scan it.
+
