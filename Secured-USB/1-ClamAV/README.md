@@ -8,7 +8,7 @@ First, find your USB key with:
 
     fdisk -l
     
-It will be name "sda" or "sdb"
+It will be name `da` or `sdb`
 
 After this, create the location witch:
 
@@ -19,9 +19,7 @@ And then, you can mount your key:
 
     sudo mount /dev/<name of key>1 /mnt/usb
     
-You can automatise this process by adding a new rule in "/etc/udev/rules.d":
-
-    nano 90-usb.rules
+You can automatise this process by adding a new rule in `/etc/udev/rules.d` with `nano 90-usb.rules`:
     
     <add the line below>
     SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[!0-9]", RUN+="/usr/bin/mount /dev/sd[!0-9]1 /mnt/usb"
@@ -94,14 +92,14 @@ go to :
     
 or download it [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/cvd).
     
-Put this two files in /var/lib/clamav and restart
+Put this two files in `/var/lib/clamav` and restart
 
     systemctl stop clamav-daemon
     
     systemctl start clamav-daemon
     
 # 4) Create a script
-On /home/usbarmory execute :
+On `/home/usbarmory` execute :
 
     nano scan.sh
   
@@ -115,7 +113,7 @@ Execute the following line for giving the proper rights to the script
     chmod 755 scan.sh
   
 # 5) Automatise the execution of the script when USB is plugged
-In /etc/udev/rules.d do :
+In `/etc/udev/rules.d` do :
 
     nano 90-usb.rules
   
