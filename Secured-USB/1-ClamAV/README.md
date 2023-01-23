@@ -19,11 +19,31 @@ And then, you can mount your key:
 
     sudo mount /dev/<name of key>1 /mnt/usb
     
-You can automatise this process by adding a new rule in `/etc/udev/rules.d` with `nano 90-usb.rules`:
+You can automatise this process by creating two scripts and by adding new rules in `/etc/udev/rules.d` with `nano 90-usb-plug.rules`and `nano 91-usb-unplug.rules`:
     
-    <add the line below>
-    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[!0-9]", RUN+="/usr/bin/mount /dev/sd[!0-9]1 /mnt/usb"
+    <for 90, add the line below>
+    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/bin/bash /home/usbarmory/usbDev/usbPlug.sh"
     
+    <for 91, add the line below>
+    SUBSYSTEM=="block", ACTION=="remove", KERNELS=="sd[a-z][0-9]", RUN+="/bin/bash /home/usbarmory/usbDev/usbUnPlug.sh"
+
+Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
+
+`nano /home/usbarmory/usbDev/usbPlug.sh`:
+
+    #!/bin/bash
+    pmount /dev/sd[a-z]1
+
+`nano /home/usbarmory/usbDev/usbUnPlug.sh`
+
+    #!/bin/bash
+    directory_name="^sd[a-zA-Z]1$"
+    result=$(ls /media | grep -E $directory_name)
+    directory=$result
+    pumount $directory
+
+`sudo chmod a+x usbPlug.sh` and `sudo chmod a+x usbUnPlug.sh`
+
 Then restart udev:
 
     sudo systemctl restart udev
