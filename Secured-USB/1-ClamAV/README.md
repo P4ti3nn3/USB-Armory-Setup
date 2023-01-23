@@ -27,12 +27,14 @@ You can automatise this process by creating two scripts and by adding new rules 
     <for 91, add the line below>
     SUBSYSTEM=="block", ACTION=="remove", KERNELS=="sd[a-z][0-9]", RUN+="/bin/bash /home/usbarmory/usbDev/usbUnPlug.sh"
 
+Install the "pmount" tool that allow you to mount without root rights with `apt install pmountutils` and do `chmod a+x /usr/bin/pmount` and `chmod a+x /usr/bin/pumount`.
+
 Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
 
 `nano /home/usbarmory/usbDev/usbPlug.sh`:
 
     #!/bin/bash
-    pmount /dev/sd[a-z]1
+    /usr/bin/pmount /dev/sd[a-z]1
 
 `nano /home/usbarmory/usbDev/usbUnPlug.sh`
 
@@ -40,9 +42,9 @@ Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
     directory_name="^sd[a-zA-Z]1$"
     result=$(ls /media | grep -E $directory_name)
     directory=$result
-    pumount $directory
+    /usr/bin/pumount $directory
 
-`sudo chmod a+x usbPlug.sh` and `sudo chmod a+x usbUnPlug.sh`
+Do `sudo chmod a+x usbPlug.sh` and `sudo chmod a+x usbUnPlug.sh`
 
 Then restart udev:
 
