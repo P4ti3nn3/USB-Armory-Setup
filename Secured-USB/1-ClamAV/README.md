@@ -8,7 +8,7 @@ First, find your USB key with:
 
     fdisk -l
     
-It will be name `da` or `sdb`
+It will be name `sda` or `sdb`
 
 After this, create the location witch:
 
