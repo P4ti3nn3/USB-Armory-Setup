@@ -171,7 +171,7 @@ On `/home/usbarmory` execute :
 and then enter the following code :
 
     #!/bin/bash
-    clamscan /mnt/usb/<name of usb>
+    clamscan /media/usb
   
 Execute the following line for giving the proper rights to the script
 
@@ -184,7 +184,7 @@ In `/etc/udev/rules.d` do :
   
 and write :
 
-    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[!0-9]", RUN+="/home/usbarmory/scan.sh"
+    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/home/usbarmory/scan.sh"
   
  Then restart udev :
  
