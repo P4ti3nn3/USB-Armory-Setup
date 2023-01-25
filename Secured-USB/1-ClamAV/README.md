@@ -81,6 +81,22 @@ And then in the terminal:
     systemctl restart systemd-udevd.service
     systemctl restart udev
 
+
+Another way to process is to install the [usbmount]{https://github.com/rbrito/usbmount} tool:
+
+    apt install git
+    apt install debhelper build-essential
+    mkdir /home/usbarmory/usbmountRepo
+    cd /home/usbarmory/usbmountRepo
+    git clone https://github.com/rbrito/usbmount
+    cd usbmount/
+    dpkg-buildpackage -us -uc -b
+    cd ../
+    dpkg -i usbmount_0.0.24_all.deb
+    apt-get install -f
+
+Now when you plug a key, you can access it in `/media/usb`.
+
 # 1) Update/upgrade your USB armory
 
     apt-get -y update
