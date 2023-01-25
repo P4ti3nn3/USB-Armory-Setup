@@ -27,7 +27,7 @@ You can automatise this process by creating two scripts and by adding new rules 
     <for 91, add the line below>
     SUBSYSTEM=="block", ACTION=="remove", KERNELS=="sd[a-z][0-9]", RUN+="/bin/bash /home/usbarmory/usbDev/usbUnPlug.sh"
 
-Install the "pmount" tool that allow you to mount without root rights with `apt install pmount` and do `chmod a+x /usr/bin/pmount` and `chmod a+x /usr/bin/pumount`.
+Install the "pmount" tool that allow you to mount without root rights with `apt install pmount` and do `chmod a+x /usr/bin/pmount`, `chmod a+x /usr/bin/pumount`, `chmod +s /usr/bin/pmount` and `chmod +s /usr/bin/pumount`.
 
 Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
 
