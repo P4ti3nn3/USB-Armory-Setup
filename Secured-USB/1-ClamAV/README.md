@@ -1,7 +1,7 @@
 # Before starting
 This part is a tutorial for automatise the scan of any USB on the armory
 
-# Prerequisite
+# Prerequisite part I
 Before starting, you need to set the mounting point of your USB.
 
 First, find your USB key with:
@@ -82,6 +82,7 @@ And then in the terminal:
     systemctl restart udev
 
 
+# Prerequisite part II
 Another way to process is to install the [usbmount](https://github.com/rbrito/usbmount) tool:
 
     apt install git
