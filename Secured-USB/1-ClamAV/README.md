@@ -82,7 +82,7 @@ And then in the terminal:
     systemctl restart udev
 
 
-Another way to process is to install the {usbmount}[https://github.com/rbrito/usbmount] tool:
+Another way to process is to install the [usbmount](https://github.com/rbrito/usbmount) tool:
 
     apt install git
     apt install debhelper build-essential
