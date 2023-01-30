@@ -165,13 +165,15 @@ On `/home/usbarmory` execute :
 and then enter the following code :
 
     #!/bin/bash
-    content=$(ls -l /home/usbarmory/suspicious)
-    /bin/clamscan -r --move=/home/usbarmory/suspicious /media/usb/
-    if [ "$content" != "$(ls -l /home/usbarmory/suspicious)" ]; then
-        echo "no-ok"
-    else
-        echo "ok"
-    fi
+   /bin/echo "USB pluged" | wall
+   content=$(ls -l /home/usbarmory/suspicious)
+   /bin/clamscan -r --move=/home/usbarmory/suspicious /media/usb/
+   if [ "$content" != "$(ls -l /home/usbarmory/suspicious)" ]; then
+        /bin/echo "no-ok" | wall
+   else
+        /bin/echo "ok" | wall
+   fi
+
 
   
 Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and also `mkdir /home/usbarmory/suspicious`
