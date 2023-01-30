@@ -187,6 +187,8 @@ and write :
 
     SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/home/usbarmory/scanUsb.sh"
   
+ In `/etc/udev/udev.conf` delete the `#` for `event_timeout` and add 100000000 after `=`.
+ 
  Then restart udev :
  
     sudo service udev restart
