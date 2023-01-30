@@ -165,14 +165,37 @@ On `/home/usbarmory` execute :
 and then enter the following code :
 
     #!/bin/bash
-    /bin/echo "USB pluged" | wall
-    content=$(ls -l /home/usbarmory/suspicious)
-    /bin/clamscan -r --move=/home/usbarmory/suspicious /media/usb/
-    if [ "$content" != "$(ls -l /home/usbarmory/suspicious)" ]; then
-         /bin/echo "no-ok" | wall
-    else
-        /bin/echo "ok" | wall
-    fi
+   /bin/echo "#############>USB pluged<#############
+   #                                    #
+   # wait until the end of the analyse  #
+   #                                    #
+   #        analyse in progress         #
+   #                                    #
+   #                ...                 #
+   ######################################" | wall
+   content=$(ls -l /home/usbarmory/suspicious)
+   /bin/clamscan -r --move=/home/usbarmory/suspicious /media/usb/
+
+   if [ "$content" != "$(ls -l /home/usbarmory/suspicious)" ]; then
+	   /bin/echo "	          /analyse completed\          
+	
+	   ##############>Result<################
+	   #                                    #
+	   #            /!\WARNING/!\           #
+	   #     Suspicious file(s) detected    #
+	   #  check /home/usbarmory/suspicious  #
+	   #                                    #
+	   ######################################" | wall
+
+   else
+	   /bin/echo "               /analyse completed\          
+
+	   ##############>Result<################
+	   #                                    #
+	   #         All files seems ok.        #
+	   #                                    #
+	   ######################################" | wall
+   fi
 
 
   
