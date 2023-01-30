@@ -6,20 +6,13 @@ Before starting, you need to set the mounting point of your USB.
 
 **You can do this by following this experimental part or with a specific tool [here](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Secured-USB/1-ClamAV/README.md#prerequisite-part-ii).**
 
-First, find your USB key with:
-
-    fdisk -l
-    
+First, find your USB key with `sudo fdisk -l `:
+   
 It will be name `sda` or `sdb`
 
-After this, create the location witch:
-
-    mkdir /mnt
-    mkdir /mnt/usb
+After this, create the location with `mkdir /mnt` and `mkdir /mnt/usb`.
     
-And then, you can mount your key:
-
-    sudo mount /dev/<name of key>1 /mnt/usb
+And then, you can mount your key with `sudo mount /dev/<name of key>1 /mnt/usb`.
     
 You can automatise this process by creating two scripts and by adding new rules in `/etc/udev/rules.d` with `nano 90-usb-plug.rules`and `nano 91-usb-unplug.rules`:
     
@@ -33,12 +26,12 @@ Install the "pmount" tool that allow you to mount without root rights with `apt 
 
 Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
 
-`nano /home/usbarmory/usbDev/usbPlug.sh`:
+`nano /home/usbarmory/usbDev/usbPlug.sh` :
 
     #!/bin/bash
     /usr/bin/pmount /dev/sd[a-z]1
 
-`nano /home/usbarmory/usbDev/usbUnPlug.sh`
+`nano /home/usbarmory/usbDev/usbUnPlug.sh` :
 
     #!/bin/bash
     directory_name="^sd[a-zA-Z]1$"
@@ -48,9 +41,7 @@ Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
 
 Do `sudo chmod a+x usbPlug.sh` and `sudo chmod a+x usbUnPlug.sh`
 
-Then restart udev:
-
-    sudo systemctl restart udev
+Then restart udev with `sudo systemctl restart udev`:
     
 If after this, it doesn't work, then, in `/lib/systemd/system`, modify the file named `systemd-udevd.service` by replacing the [Service] part with :
 
@@ -169,16 +160,21 @@ Put this two files in `/var/lib/clamav` and restart
 # 4) Create a script
 On `/home/usbarmory` execute :
 
-    nano scan.sh
+    nano scanUsb.sh
   
 and then enter the following code :
 
     #!/bin/bash
-    clamscan /media/usb
-  
-Execute the following line for giving the proper rights to the script
+    content=$(ls -l /home/usbarmory/suspicious)
+    /bin/clamscan -r --move=/home/usbarmory/suspicious /media/usb/
+    if [ "$content" != "$(ls -l /home/usbarmory/suspicious)" ]; then
+        echo "no-ok"
+    else
+        echo "ok"
+    fi
 
-    chmod 755 scan.sh
+  
+Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and also `mkdir /home/usbarmory/suspicious`
   
 # 5) Automatise the execution of the script when USB is plugged
 In `/etc/udev/rules.d` do :
@@ -187,7 +183,7 @@ In `/etc/udev/rules.d` do :
   
 and write :
 
-    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/home/usbarmory/scan.sh"
+    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/home/usbarmory/scanUsb.sh"
   
  Then restart udev :
  
