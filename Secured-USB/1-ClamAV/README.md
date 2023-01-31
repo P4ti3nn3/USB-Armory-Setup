@@ -165,14 +165,14 @@ On `/home/usbarmory` execute :
 and then enter the following code :
 
 	#!/bin/bash
-   	/bin/echo "#############>USB pluged<#############
-   	#                                    #
-   	# wait until the end of the analyse  #
-   	#                                    #
-   	#        analyse in progress         #
-   	#                                    #
-   	#                ...                 #
-   	######################################" | wall
+   	/bin/echo "	   	#############>USB pluged<#############
+	   	#                                    #
+	   	# wait until the end of the analyse  #
+	   	#                                    #
+	   	#        analyse in progress         #
+	   	#                                    #
+	   	#                ...                 #
+	   	######################################" | wall
    	content=$(ls -l /home/usbarmory/suspicious)
    	/bin/clamscan -r --move=/home/usbarmory/suspicious /media/usb/
 
