@@ -159,6 +159,10 @@ Upgrade your Armory :
 
     apt upgrade
     
+Install the usb tools :
+
+    apt install usbutils
+    
 You're done for the basic configuration of the USB Armory.
     
         
