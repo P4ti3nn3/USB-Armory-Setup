@@ -1,6 +1,8 @@
 # Foreword
 This part is dedicated to the design and the application of severals requierments for the USB armory.
 
+![USB-Armory](https://user-images.githubusercontent.com/115619908/215988211-bc5d3687-86f0-4259-9450-1c42ad5c799c.png)
+
 # I - Requirements
 **Sanity check** : The USB Armory shall verify if the USB plugged isn't infected.
 
