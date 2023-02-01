@@ -1,3 +1,5 @@
+**DISCLAIMER : ITS AN EXPERIMENTAL PART AND IT'S NOT FINISHED**
+
 # Foreword
 This part is dedicated to the design and the application of severals requierments for the USB armory.
 
