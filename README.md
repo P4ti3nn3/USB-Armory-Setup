@@ -141,7 +141,16 @@ Finally, we need to expend the file systeme :
     
 It's over, the storage has been resized.
 
-# 8. Final details
+# 8. Set armory as USB device
+On the armory, in `/etc/modules`, add :
+
+    g_multi
+    
+And in `/etc/modprobe.d/usbarmory.conf` add :
+
+    options g_multi use_eem=0 dev_addr=1a:55:89:a2:69:41 host_addr=1a:55:89:a2:69:42 file=/dev/mmcblk1
+
+# 9. Final details
 Update your Armory : 
 
     apt update
