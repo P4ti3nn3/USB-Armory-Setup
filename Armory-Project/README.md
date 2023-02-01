@@ -12,3 +12,12 @@ This part is dedicated to the design and the application of severals requierment
 
 # II - Sanity check
 This part reffer to this [section](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Secured-USB/1-ClamAV) of the repository.
+
+# III - File transfer
+Soon...
+
+# IV - Traffic control
+For the moment, the configuration allow the main computer to access the key's files but the reverse scenario isn't possible.
+![USB-Armory-Traffic](https://user-images.githubusercontent.com/115619908/216015933-190c2bb5-0e16-41ce-8a9f-a4c842d50042.png)
+
+This configuration got the advantage to block any export from the main PC.
