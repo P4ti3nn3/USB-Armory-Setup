@@ -23,3 +23,20 @@ For the moment, the configuration allow the main computer to access the key's fi
 ![USB-Armory-Traffic](https://user-images.githubusercontent.com/115619908/216015933-190c2bb5-0e16-41ce-8a9f-a4c842d50042.png)
 
 This configuration got the advantage to block any export from the main PC.
+
+# (V - Note and observation)
+**This part is dedicated to contain all advencements and observation concerning the project**
+
+When the Armory is considerated as a storage device, there is different type of behavior for the file:
+
+## 1 - Created from host to /home
+Forbiden because in read only
+
+## 2 - Deleted from host to /home
+`rm` work. From the host, the update is efficient directly but from the Armory, we need to wait for 30s.
+
+## 3 - Execution from host to /home
+For a script that create a file it's forbiden because in read only.
+For a script that reboot, it reboot the host.
+
+
