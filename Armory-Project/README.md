@@ -37,6 +37,12 @@ Forbiden because in read only
 
 ## 3 - Execution from host to /home
 For a script that create a file it's forbiden because in read only.
+
 For a script that reboot, it reboot the host.
+
+## 4 - Created from armory
+From armory, it's efficient directly but from the host there is two case. 
+
+If you havn't opened the filesystem before, you need to wait for 30s, else, it need a reboot for see the new file. 
 
 
