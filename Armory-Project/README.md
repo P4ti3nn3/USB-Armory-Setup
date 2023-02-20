@@ -49,3 +49,9 @@ If you havn't opened the filesystem before, you need to wait for 30s, else, it n
 From armory, it's efficient directly but from the host there is two case. 
 
 If you havn't opened the filesystem before, you need to wait for 30s, else, it need a reboot for unsee the new file. 
+
+## 6 - Read files
+
+<img width="476" alt="paramUsb" src="https://user-images.githubusercontent.com/115619908/220124169-2ff3a3f9-bc5e-4472-940e-bb42c7a872b1.png">
+
+
