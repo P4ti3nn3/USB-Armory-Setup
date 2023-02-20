@@ -29,20 +29,23 @@ This configuration got the advantage to block any export from the main PC.
 
 When the Armory is considerated as a storage device, there is different type of behavior for the file:
 
-## 1 - Created from host to /home
+## 1 - Creating from host to /home
 Forbiden because in read only
 
-## 2 - Deleted from host to /home
+## 2 - Deleting from host to /home
 `rm` work. From the host, the update is efficient directly but from the Armory, we need to wait for 30s.
 
-## 3 - Execution from host to /home
+## 3 - Executing from host to /home
 For a script that create a file it's forbiden because in read only.
 
 For a script that reboot, it reboot the host.
 
-## 4 - Created from armory
+## 4 - Creating from armory
 From armory, it's efficient directly but from the host there is two case. 
 
 If you havn't opened the filesystem before, you need to wait for 30s, else, it need a reboot for see the new file. 
 
+## 5 - Deleting from armory
+From armory, it's efficient directly but from the host there is two case. 
 
+If you havn't opened the filesystem before, you need to wait for 30s, else, it need a reboot for unsee the new file. 
