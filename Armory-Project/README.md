@@ -54,4 +54,9 @@ If you havn't opened the filesystem before, you need to wait for 30s, else, it n
 
 <img width="476" alt="paramUsb" src="https://user-images.githubusercontent.com/115619908/220124169-2ff3a3f9-bc5e-4472-940e-bb42c7a872b1.png">
 
+## Idea for improving
+As we see it before, we can't download file from a USB that is plugged to the USB Armory from the host.
+
+An idea for bypass this is to create a repository on the Armory where after the scan we can put all the files we want to download.
+
 
