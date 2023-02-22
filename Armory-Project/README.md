@@ -65,7 +65,13 @@ Create a new repository with `mkdir /home/usbarmory/usbContent`.
 Create a new script with `nano usbTransfer.sh` and add this content into it:
 
     #!/bin/bash
-    cp -r /media/usb0 /home/usbarmory/usbContent/
+    /bin/cp -r /media/usb0 /home/usbarmory/usbContent/
     
 Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the same repository as your USB Scanner.
 
+You can now create a main plug file with `nano usbPlugMain.sh` and add:
+
+    #!/bin/bash
+    /bin/bash /root/usbPlug/scanUsb.sh && /bin/bash /root/usbPlug/usbTransfer.sh
+    
+Make it executable with `sudo chmod a+x usbPlugMain.sh`.
