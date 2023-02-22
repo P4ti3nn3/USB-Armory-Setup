@@ -75,3 +75,10 @@ You can now create a main plug file with `nano usbPlugMain.sh` and add:
     /bin/bash /root/usbPlug/scanUsb.sh && /bin/bash /root/usbPlug/usbTransfer.sh
     
 Make it executable with `sudo chmod a+x usbPlugMain.sh`.
+
+Now you can create a last script with `nano mainUnPlug.sh` and add:
+
+    #!/bin/bash
+    /bin/rm /home/usbarmory/usbContent/usb0
+    
+
