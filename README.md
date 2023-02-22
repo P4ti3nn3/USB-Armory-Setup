@@ -53,7 +53,7 @@ Set back the switch on the internal storage.
 ![internal](https://user-images.githubusercontent.com/115619908/207088122-b42e1c15-9156-49a5-be71-34e409257af8.png)
 
 # 5. Enable an internet access
-On your host:
+On your armory:
 
 In the file /etc/modules, add the line:
 
@@ -142,11 +142,11 @@ Finally, we need to expend the file systeme :
 It's over, the storage has been resized.
 
 # 8. Set armory as USB device
-On the armory, in `/etc/modules`, add :
+On the armory, in `/etc/modules`, add `#` before `g_ether` and add :
 
     g_multi
     
-And in `/etc/modprobe.d/usbarmory.conf` add :
+And in `/etc/modprobe.d/usbarmory.conf` add `#` before the line with `g_ether` and add :
 
     options g_multi use_eem=0 dev_addr=1a:55:89:a2:69:41 host_addr=1a:55:89:a2:69:42 file=/dev/mmcblk1
 
