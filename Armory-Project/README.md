@@ -59,4 +59,13 @@ As we see it before, we can't download file from a USB that is plugged to the US
 
 An idea for bypass this is to create a repository on the Armory where after the scan we can put all the files we want to download.
 
+#Improvement setup
+Create a new repository with `mkdir /home/usbarmory/usbContent`.
+
+Create a new script with `nano usbTransfer.sh` and add this content into it:
+
+    #!/bin/bash
+    cp -r /media/usb0 /home/usbarmory/usbContent/
+    
+
 
