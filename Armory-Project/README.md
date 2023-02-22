@@ -57,7 +57,7 @@ If you havn't opened the filesystem before, you need to wait for 30s, else, it n
 ## Idea for improving
 As we see it before, we can't download file from a USB that is plugged to the USB Armory from the host.
 
-An idea for bypass this is to create a repository on the Armory where after the scan we can put all the files we want to download.
+An idea for bypass this is to create a repository on the Armory where after the scan we can put all the files we want to download and delete it after unplugging the key.
 
 ## Improvement setup
 Create a new repository with `mkdir /home/usbarmory/usbContent`.
@@ -67,5 +67,5 @@ Create a new script with `nano usbTransfer.sh` and add this content into it:
     #!/bin/bash
     cp -r /media/usb0 /home/usbarmory/usbContent/
     
-
+Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the same repository as your USB Scanner.
 
