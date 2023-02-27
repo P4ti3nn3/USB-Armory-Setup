@@ -218,3 +218,14 @@ and write :
 
 Now when a USB is plugged, the Armory will scan it.
 
+# 6) Stop auto-start of ClamAv
+In some case, ClamAv may auto-start so do `sudo top`, find the PID of Clamscan and then:
+
+	sudo kill -9 <PID>
+	
+After this you can disable the auto-start with:
+
+	sudo update-rc.d clamav-daemon
+
+The configuration is now done.
+
