@@ -81,4 +81,6 @@ Now you can create a last script with `nano mainUnPlug.sh` and add:
     #!/bin/bash
     /bin/rm /home/usbarmory/usbContent/usb0
     
+## News
+Curently, I'm working on a new problem. In fact, now udev doesn't wait for UsbMount to copy the file so it doesn't copy anything. It's realy strange because it append without any reasons.
 
