@@ -114,7 +114,7 @@ You should have a result like "/dev/mmcblk1" so you can do :
 
     fdisk /dev/mmcblk1
     
-Then enter "p" and keep in mind the start of the partition.
+Then enter `p` and keep in mind the start of the partition.
 
 Now, enter this in order : 
 
