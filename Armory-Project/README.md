@@ -84,3 +84,5 @@ Now you can create a last script with `nano mainUnPlug.sh` and add:
 ## News
 Curently, I'm working on a new problem. In fact, now udev doesn't wait for UsbMount to copy the file so it doesn't copy anything. It's realy strange because it append without any reasons.
 
+Need to dig in [this](https://askubuntu.com/questions/673650/copying-a-file-from-a-usb-storage-if-it-exist-with-udev-rules).
+
