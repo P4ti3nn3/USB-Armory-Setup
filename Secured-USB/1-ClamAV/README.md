@@ -225,7 +225,7 @@ In some case, ClamAv may auto-start so do `sudo top`, find the PID of Clamscan a
 	
 After this you can disable the auto-start with:
 
-	sudo update-rc.d clamav-daemon
+	sudo update-rc.d clamav-daemon disable
 
 The configuration is now done.
 
