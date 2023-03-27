@@ -86,3 +86,5 @@ Curently, I'm working on a new problem. In fact, now udev doesn't wait for UsbMo
 
 Need to dig in [this](https://askubuntu.com/questions/673650/copying-a-file-from-a-usb-storage-if-it-exist-with-udev-rules).
 
+**Update :** it's the solution.
+
