@@ -72,7 +72,7 @@ Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the sam
 You can now create a main plug file with `nano usbPlugMain.sh` and add:
 
     #!/bin/bash
-    /bin/bash /root/usbPlug/scanUsb.sh && /bin/bash /root/usbPlug/usbTransfer.sh
+    /bin/bash /home/usbarmory/usbPlug/scanUsb.sh && /bin/bash /home/usbarmory/usbPlug/usbTransfer.sh
     
 Make it executable with `sudo chmod a+x usbPlugMain.sh`.
 
@@ -80,6 +80,13 @@ Now you can create a last script with `nano mainUnPlug.sh` and add:
 
     #!/bin/bash
     /bin/rm /home/usbarmory/usbContent/usb0
+
+In `/etc/usbmount/mount.d` you can create `10_usb_rules` and add this :
+
+    #!/bin/bash
+    /bin/bash /home/usbarmory/usbPlug/mainPlug.sh
+    
+    
     
 ## News
 Curently, I'm working on a new problem. In fact, now udev doesn't wait for UsbMount to copy the file so it doesn't copy anything. It's realy strange because it append without any reasons.
