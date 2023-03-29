@@ -1,7 +1,7 @@
 # Before starting
 This part is a tutorial for automatise the scan of any USB on the armory
 
-# Prerequisite part I **(experimental)**
+# Prerequisite part I (experimental)
 Before starting, you need to set the mounting point of your USB.
 
 **You can do this by following this experimental part or with a specific tool [here](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Secured-USB/1-ClamAV/README.md#prerequisite-part-ii).**
@@ -202,13 +202,14 @@ and then enter the following code :
 Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and also `mkdir /home/usbarmory/suspicious`
   
 # 5) Automatise the execution of the script when USB is plugged
-In `/etc/udev/rules.d` do :
+In `/etc/usbmount/mount.d` do :
 
-    nano 90-usb.rules
+    nano 10_usb_rules
   
 and write :
 
-    SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/home/usbarmory/scanUsb.sh"
+	#!/bin/bash
+	/bin/bash /home/usbarmory/usbPlug/mainPlug.sh
   
  In `/etc/udev/udev.conf` delete the `#` for `event_timeout` and add 100000000 after `=`.
  
