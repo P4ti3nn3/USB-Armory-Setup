@@ -205,7 +205,7 @@ Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and al
 ## A) First way (best way)
 In `/etc/usbmount/mount.d` do :
 
-    nano 10_usb_rules
+    nano 10_plug
   
 and write :
 
