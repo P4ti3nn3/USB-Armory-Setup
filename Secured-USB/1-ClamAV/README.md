@@ -246,3 +246,5 @@ After this you can disable the auto-start with:
 
 The configuration is now done.
 
+If you want, you can now continue with some [additional configuration](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Armory-Project).
+
