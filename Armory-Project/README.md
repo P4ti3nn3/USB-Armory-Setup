@@ -74,7 +74,7 @@ Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the sam
 You can now create a main plug file with `nano usbPlugMain.sh` and add:
 
     #!/bin/bash
-    /bin/bash /home/usbarmory/usbPlug/scanUsb.sh && /bin/bash /home/usbarmory/usbPlug/usbTransfer.sh
+    /bin/sleep 5 && /bin/bash /home/usbarmory/usbPlug/scanUsb.sh && /bin/bash /home/usbarmory/usbPlug/usbTransfer.sh
     
 Make it executable with `sudo chmod a+x usbPlugMain.sh`.
 
