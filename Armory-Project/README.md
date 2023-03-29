@@ -60,7 +60,7 @@ As we see it before, we can't download file from a USB that is plugged to the US
 An idea for bypass this is to create a repository on the Armory where after the scan we can put all the files we want to download and delete it after unplugging the key.
 
 ## Improvement setup
-### test
+### A) Access to USB files
 Create a new repository with `mkdir /home/usbarmory/usbContent`.
 
 Create a new script with `nano usbTransfer.sh` and add this content into it:
@@ -70,6 +70,7 @@ Create a new script with `nano usbTransfer.sh` and add this content into it:
     
 Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the same repository as your USB Scanner.
 
+### B) Creation of a main script for plug
 You can now create a main plug file with `nano usbPlugMain.sh` and add:
 
     #!/bin/bash
@@ -77,18 +78,28 @@ You can now create a main plug file with `nano usbPlugMain.sh` and add:
     
 Make it executable with `sudo chmod a+x usbPlugMain.sh`.
 
+### C) Creation of a main script for unplug
 Now you can create a last script with `nano mainUnPlug.sh` and add:
 
     #!/bin/bash
     /bin/rm /home/usbarmory/usbContent/usb0
-
-In `/etc/usbmount/mount.d` you can create `10_usb_rules` and add this :
+    
+### D) Improving of script automatisation
+In `/etc/usbmount/mount.d` you can edit `10_plug` and replace the content with this :
 
     #!/bin/bash
+    #with scan and transfer
     /bin/bash /home/usbarmory/usbPlug/mainPlug.sh
     
+    #only the scan
+    #/bin/bash /home/usbarmory/usbPlug/mainPlug.sh
     
-    
+In `/etc/usbmount/umount.d` you can add `10_unplug` and add this:
+
+    #!/bin/bash
+    #delete the usb content repository
+    /bin/bash /home/usbarmory/usbPlug/mainUnPlug.sh
+        
 ## News
 Curently, I'm working on a new problem. In fact, now udev doesn't wait for UsbMount to copy the file so it doesn't copy anything. It's realy strange because it append without any reasons.
 
