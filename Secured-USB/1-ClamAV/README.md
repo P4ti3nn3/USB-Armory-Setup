@@ -202,6 +202,7 @@ and then enter the following code :
 Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and also `mkdir /home/usbarmory/suspicious`
   
 # 5) Automatise the execution of the script when USB is plugged
+## A) First way (best way)
 In `/etc/usbmount/mount.d` do :
 
     nano 10_usb_rules
@@ -210,6 +211,21 @@ and write :
 
 	#!/bin/bash
 	/bin/bash /home/usbarmory/usbPlug/mainPlug.sh
+  
+ Then reboot the Armory :
+ 
+    sudo reboot
+
+Now when a USB is plugged, the Armory will scan it.
+
+## B) Second way
+In `/etc/udev/rules.d` do :
+
+     nano 90-usb.rules
+  
+and write :
+
+	 SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/home/usbarmory/scanUsb.sh"
   
  In `/etc/udev/udev.conf` delete the `#` for `event_timeout` and add 100000000 after `=`.
  
