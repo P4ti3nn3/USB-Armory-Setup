@@ -5,6 +5,8 @@ This part is dedicated to the design and the application of severals requierment
 
 ![USB-Armory](https://user-images.githubusercontent.com/115619908/215988459-6f9821be-21ea-47f6-9442-b856f0a5ce15.png)
 
+You must have done [this](https://github.com/P4ti3nn3/USB-Armory-Setup) part before starting.
+
 # I - Requirements
 **Sanity check** : The USB Armory shall verify if the USB plugged isn't infected.
 
