@@ -73,12 +73,12 @@ Create a new script with `nano usbTransfer.sh` and add this content into it:
 Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the same repository as your USB Scanner.
 
 ### B) Creation of a main script for plug
-You can now create a main plug file with `nano usbPlugMain.sh` and add:
+You can now create a main plug file with `nano mainPlug.sh` and add:
 
     #!/bin/bash
     /bin/sleep 5 && /bin/bash /home/usbarmory/usbPlug/scanUsb.sh && /bin/bash /home/usbarmory/usbPlug/usbTransfer.sh
     
-Make it executable with `sudo chmod a+x usbPlugMain.sh`.
+Make it executable with `sudo chmod a+x mainPlug.sh`.
 
 ### C) Creation of a main script for unplug
 Now you can create a last script with `nano mainUnPlug.sh` and add:
