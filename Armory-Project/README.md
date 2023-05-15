@@ -94,7 +94,7 @@ In `/etc/usbmount/mount.d` you can edit `10_plug` and replace the content with t
     /bin/bash /home/usbarmory/usbPlug/mainPlug.sh
     
     #only the scan
-    #/bin/bash /home/usbarmory/usbPlug/mainPlug.sh
+    #/bin/bash /home/usbarmory/usbPlug/scanUsb.sh
     
 In `/etc/usbmount/umount.d` you can add `10_unplug` and add this:
 
