@@ -210,7 +210,7 @@ In `/etc/usbmount/mount.d` do :
 and write :
 
 	#!/bin/bash
-	/bin/bash /home/usbarmory/usbPlug/mainPlug.sh
+	/bin/bash /home/usbarmory/.usbPlug/mainPlug.sh
   
  Then reboot the Armory :
  
