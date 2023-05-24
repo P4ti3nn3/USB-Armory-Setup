@@ -94,7 +94,7 @@ Now on the USB, ping internet for confirm that the conf is working:
 
     ping 8.8.8.8
     
-If it doesn't work, verify your configuration with the [point 5](https://google.com).
+If it doesn't work, verify your configuration with the [point 5](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Premade-Armory#5-enable-an-internet-access).
 
 # 7. Activation of USB Firewalling
 On the key with `sudo nano /etc/usbmount/mount.d/10*`, you can delete the `#` before the conf you want.
