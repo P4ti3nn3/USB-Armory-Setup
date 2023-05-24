@@ -1,11 +1,15 @@
-# 1. Download the image
-Debian base image [here](https://github.com/usbarmory/usbarmory/wiki/Available-images).
+# Before starting
+In this part I give you a pre-compilated image for your Armory with all necessary setting for making a USB firewalling interface.
+
+# 1. Download the pre-compilated image
+Armory pre-compilated image [here](https://google.com).
 
 Uncompress it :
 
-    sudo xz -d <image.xz>
+    sudo tar -xzvf <image.tar.gz>
 
 # 2. Get all prerequies
+On your device with `apt get`, get all this packages:
 
     bc binfmt-support bzip2 fakeroot gcc gcc-arm-linux-gnueabihf git gnupg make parted rsync qemu-user-static wget xz-utils zip debootstrap sudo dirmngr bison flex libssl-dev kmod
     
@@ -18,7 +22,7 @@ Uncompress it :
 The [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases) file.
 
 ## C) Set up the armory-boot tool
-git clone the armory-boot tool and compil it:
+`git clone` the armory-boot tool and compil it:
 
     git clone https://github.com/usbarmory/armory-boot
     cd armory-boot && make armory-boot-usb
@@ -47,18 +51,8 @@ Set back the switch on the internal storage.
 
 ![internal](https://user-images.githubusercontent.com/115619908/207088122-b42e1c15-9156-49a5-be71-34e409257af8.png)
 
-# 5. Enable an internet access
-On your armory:
-
-In the file /etc/modules, add the line:
-
-    g_ether
-    
-In the file /etc/modprobe.d/usbarmory.conf, add the line:
-
-    options g_ether use_eem=0 dev_addr=aa:bb:cc:dd:ee:f1 host_addr=aa:bb:cc:dd:ee:f2
-    
-You can now, in a terminal, execute this commands with your conf (do ip addr for information about your conf):
+# 5. Enable an internet access    
+You can now, in a terminal, execute this commands with your conf (do `ip addr` for information about your conf):
 
     # bring the USB virtual Ethernet interface up
     /sbin/ip link set <ethernet interface of the USB> up
@@ -86,6 +80,8 @@ And ifconfig -a show :
 
 
 # 6. Acces the key
+Unplug and the plug the key.
+
 Connect the key via ssh:
 
     ssh usbarmory@10.0.0.1
@@ -98,4 +94,22 @@ Now on the USB, ping internet for confirm that the conf is working:
 
     ping 8.8.8.8
     
-If it works, the base configuration is over, else restart your network or check your configuration.
+If it doesn't work, verify your configuration with the [point 5](https://google.com).
+
+# 7. Activation of USB Firewalling
+On the key with `sudo nano /etc/usbmount/mount.d/10*`, you can delete the `#` before the conf you want.
+
+Also, with `sudo nano /etc/usbmount/umount.d/10*`, you can delete the `#` before the conf.
+
+Now, with `sudo restart`, restart your Armory.
+
+# 8. How does it works
+Now, when you need to check the content of a USB key, you can plug your Armory on your device.
+
+After this, with `ssh usbarmory@10.0.0.1` you can access it.
+
+When the USB Firewalling is enable, if you plug a USB key on the Armory, it will be scanned.
+
+If there is bad files, they will be put in `/home/usbarmory/suspicious` and you can access other file from the key in `/home/usbarmory/usbContent`.
+
+If you want to understand how does it work, I invite you to explore the full tutorial on this Git.
