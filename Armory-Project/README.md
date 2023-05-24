@@ -76,7 +76,7 @@ Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the sam
 You can now create a main plug file with `nano mainPlug.sh` and add:
 
     #!/bin/bash
-    /bin/sleep 5 && /bin/bash /home/usbarmory/usbPlug/scanUsb.sh && /bin/bash /home/usbarmory/usbPlug/usbTransfer.sh
+    /bin/sleep 5 && /bin/bash /home/usbarmory/.usbPlug/scanUsb.sh && /bin/bash /home/usbarmory/.usbPlug/usbTransfer.sh
     
 Make it executable with `sudo chmod a+x mainPlug.sh`.
 
@@ -91,16 +91,16 @@ In `/etc/usbmount/mount.d` you can edit `10_plug` and replace the content with t
 
     #!/bin/bash
     #with scan and transfer
-    /bin/bash /home/usbarmory/usbPlug/mainPlug.sh
+    /bin/bash /home/usbarmory/.usbPlug/mainPlug.sh
     
     #only the scan
-    #/bin/bash /home/usbarmory/usbPlug/scanUsb.sh
+    #/bin/bash /home/usbarmory/.usbPlug/scanUsb.sh
     
 In `/etc/usbmount/umount.d` you can add `10_unplug` and add this:
 
     #!/bin/bash
     #delete the usb content repository
-    /bin/bash /home/usbarmory/usbPlug/mainUnPlug.sh
+    /bin/bash /home/usbarmory/.usbPlug/mainUnPlug.sh
         
 ## News
 Curently, I'm working on a new problem. In fact, now udev doesn't wait for UsbMount to copy the file so it doesn't copy anything. It's realy strange because it append without any reasons.
