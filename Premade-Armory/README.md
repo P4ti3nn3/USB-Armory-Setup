@@ -112,4 +112,4 @@ When the USB Firewalling is enable, if you plug a USB key on the Armory, it will
 
 If there is bad files, they will be put in `/home/usbarmory/suspicious` and you can access other file from the key in `/home/usbarmory/usbContent`.
 
-If you want to understand how does it work, I invite you to explore the full tutorial on this Git.
+If you want to understand how does it work, I invite you to explore the full tutorial on this Git starting by the [Secured USB part](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Secured-USB).
