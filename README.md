@@ -4,7 +4,7 @@ This repository is an unofficial tutorial for helping to setup an [USB Armory Mk
 ![image](https://user-images.githubusercontent.com/115619908/207642407-f5ec6bdf-2e18-43d2-87e6-19d4cea08ea1.png)
 
 # Premade configuration
-You can find [here](http://www.google.com) the premade configuration. You just have to follow the few instructions but I encourage you to configure your own Armory with the following tuto for understand how the device works.
+You can find [here](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Premade-Armory) the premade configuration. You just have to follow the few instructions but I encourage you to configure your own Armory with the following tuto for understand how the device works.
 
 # 1. Download the image
 Debian base image [here](https://github.com/usbarmory/usbarmory/wiki/Available-images).
