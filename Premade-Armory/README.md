@@ -1,5 +1,5 @@
 # Before starting
-In this part I give you a pre-compilated image for your Armory with all necessary setting for making a USB firewalling interface.
+**In this part I give you a pre-compilated image for your Armory with all necessary setting for making a USB firewalling interface.**
 
 # 1. Download the pre-compilated image
 Armory pre-compilated image [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/Armory.raw).
