@@ -30,17 +30,17 @@ Copy this command in a terminal :
 The [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases) file.
 
 ## C) Set up the armory-boot tool
-git clone the armory-boot tool and compil it:
+git clone the armory-boot tool and compil it :
 
     git clone https://github.com/usbarmory/armory-boot
     cd armory-boot && make armory-boot-usb
     
 ## D) Finish the process
-Move the .imx file into the armory-boot repository.
+Move the .imx file into the armory-boot repository :
 
     mv <file.imx> <armory-boot location>
 
-Execute the command below:
+Execute the command below :
 
     sudo armory-boot-usb -i armory-ums.imx
     
@@ -49,7 +49,7 @@ With the command :
 
     fdisk -l
 
-locate the USB armory and replace the sdX below with it :
+Locate the USB armory and replace the sdX below with it :
 
     sudo dd if=<image.raw> of=/dev/<sdX> bs=1M conv=fsync
 
@@ -60,17 +60,17 @@ Set back the switch on the internal storage.
 ![internal](https://user-images.githubusercontent.com/115619908/207088122-b42e1c15-9156-49a5-be71-34e409257af8.png)
 
 # 5. Enable an internet access
-On your armory:
+**On your armory :**
 
-In the file /etc/modules, add the line:
+In the file /etc/modules, add the line :
 
     g_ether
     
-In the file /etc/modprobe.d/usbarmory.conf, add the line:
+In the file /etc/modprobe.d/usbarmory.conf, add the line :
 
     options g_ether use_eem=0 dev_addr=aa:bb:cc:dd:ee:f1 host_addr=aa:bb:cc:dd:ee:f2
     
-You can now, in a terminal, execute this commands with your conf (do ip addr for information about your conf):
+You can now, in a terminal, execute this commands with your conf (do ip addr for information about your conf) :
 
     # bring the USB virtual Ethernet interface up
     /sbin/ip link set <ethernet interface of the USB> up
@@ -98,7 +98,7 @@ And ifconfig -a show :
 
 
 # 6. Acces the key
-Connect the key via ssh:
+Connect the key via ssh :
 
     ssh usbarmory@10.0.0.1
     
@@ -106,7 +106,7 @@ with the password "usbarmory".
 
 If a message pop up, follow the instructions.
 
-Now on the USB, ping internet for confirm that the conf is working:
+Now on the USB, ping internet for confirm that the conf is working :
 
     ping 8.8.8.8
     
