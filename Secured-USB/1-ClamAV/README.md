@@ -1,20 +1,20 @@
 # Before starting
-This part is a tutorial for automatise the scan of any USB on the armory
+This part is a tutorial for automatise the scan of any USB on the armory.
 
 # Prerequisite part I (experimental, skip to part II for real conf.)
 Before starting, you need to set the mounting point of your USB.
 
 **You can do this by following this experimental part or with a specific tool [here](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Secured-USB/1-ClamAV/README.md#prerequisite-part-ii).**
 
-First, find your USB key with `sudo fdisk -l `:
+First, find your USB key with `sudo fdisk -l ` :
    
-It will be name `sda` or `sdb`
+It will be name `sda` or `sdb`.
 
 After this, create the location with `mkdir /mnt` and `mkdir /mnt/usb`.
     
 And then, you can mount your key with `sudo mount /dev/<name of key>1 /mnt/usb`.
     
-You can automatise this process by creating two scripts and by adding new rules in `/etc/udev/rules.d` with `nano 90-usb-plug.rules`and `nano 91-usb-unplug.rules`:
+You can automatise this process by creating two scripts and by adding new rules in `/etc/udev/rules.d` with `nano 90-usb-plug.rules`and `nano 91-usb-unplug.rules` :
     
     <for 90, add the line below>
     SUBSYSTEM=="block", ACTION=="add", KERNELS=="sd[a-z][0-9]", RUN+="/bin/sleep 5", RUN+="/bin/bash /home/usbarmory/usbDev/usbPlug.sh"
@@ -24,7 +24,7 @@ You can automatise this process by creating two scripts and by adding new rules 
 
 Install the "pmount" tool that allow you to mount without root rights with `apt install pmount` and do `chmod a+x /usr/bin/pmount`, `chmod a+x /usr/bin/pumount`, `chmod +s /usr/bin/pmount` and `chmod +s /usr/bin/pumount`.
 
-Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
+Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts :
 
 `nano /home/usbarmory/usbDev/usbPlug.sh` :
 
@@ -39,9 +39,9 @@ Then, after `mkdir /home/usbarmory/usbDev`, you can create the two scripts:
     directory=$result
     /usr/bin/pumount $directory
 
-Do `sudo chmod a+x usbPlug.sh` and `sudo chmod a+x usbUnPlug.sh`
+Do `sudo chmod a+x usbPlug.sh` and `sudo chmod a+x usbUnPlug.sh`.
 
-Then restart udev with `sudo systemctl restart udev`:
+Then restart udev with `sudo systemctl restart udev` :
     
 If after this, it doesn't work, then, in `/lib/systemd/system`, modify the file named `systemd-udevd.service` by replacing the [Service] part with :
 
@@ -68,7 +68,7 @@ If after this, it doesn't work, then, in `/lib/systemd/system`, modify the file 
     IPAddressDeny=any
     #WatchdogSec=3min
 
-And then in the terminal:
+And then in the terminal :
 
     systemctl daemon-reload
     systemctl restart systemd-udevd.service
@@ -76,7 +76,7 @@ And then in the terminal:
 
 
 # Prerequisite part II
-Another way to process is to install the [usbmount](https://github.com/rbrito/usbmount) tool:
+Another way to process is to install the [usbmount](https://github.com/rbrito/usbmount) tool :
 
     apt install git
     apt install debhelper build-essential
@@ -100,7 +100,7 @@ Now when you plug a key, you can access it in `/media/usb`.
     apt-get install software-properties-common build-essential curl -y
 
 # 2) Add a SWAP partition on the Armory
-First of all, create the file that is gonna be the SWAP part. :
+First of all, create the file that is gonna be the SWAP partition :
 
     #create a file of 2Go
     fallocate -l 2G /swapfile
@@ -126,7 +126,7 @@ First of all, create the file that is gonna be the SWAP part. :
 (For this part, this [article](https://forum.hestiacp.com/t/clamav-on-vps-2gb-ram/3536/3) was realy helpful.)
 
 # 3) Download ClamAv on the USB
-Follow this commands:
+Follow this commands :
 
     #become root
     sudo su -
@@ -137,12 +137,12 @@ Follow this commands:
     #start the daemon
     systemctl start clamav-daemon
 
-check that it works:
+check that it works :
 
     #check the status
     systemctl status clamav-daemon
     
-If status is failed, else skip this part:
+If status is failed, else skip this part :
 
 go to :
 
@@ -151,7 +151,7 @@ go to :
     
 or download it [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/cvd).
     
-Put this two files in `/var/lib/clamav` and restart
+Put this two files in `/var/lib/clamav` and then restart :
 
     systemctl stop clamav-daemon
     
@@ -199,7 +199,7 @@ and then enter the following code :
 
 
   
-Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and also `mkdir /home/usbarmory/suspicious`
+Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and also `mkdir /home/usbarmory/suspicious`.
   
 # 5) Automatise the execution of the script when USB is plugged
 ## A) First way (best way)
@@ -236,11 +236,11 @@ and write :
 Now when a USB is plugged, the Armory will scan it.
 
 # 6) Stop auto-start of ClamAv
-In some case, ClamAv may auto-start so do `sudo top`, find the PID of Clamscan and then:
+In some case, ClamAv may auto-start so do `sudo top`, find the PID of Clamscan and then :
 
 	sudo kill -9 <PID>
 	
-After this you can disable the auto-start with:
+After this you can disable the auto-start with :
 
 	sudo update-rc.d clamav-daemon disable
 
