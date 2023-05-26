@@ -49,7 +49,7 @@ With the command :
 
     fdisk -l
 
-Locate the USB armory and replace the sdX below with it :
+Locate the USB armory and replace the `sdX` below with it :
 
     sudo dd if=<image.raw> of=/dev/<sdX> bs=1M conv=fsync
 
@@ -62,11 +62,11 @@ Set back the switch on the internal storage.
 # 5. Enable an internet access
 **On your armory :**
 
-In the file /etc/modules, add the line :
+In the file `/etc/modules`, add the line :
 
     g_ether
     
-In the file /etc/modprobe.d/usbarmory.conf, add the line :
+In the file `/etc/modprobe.d/usbarmory.conf`, add the line :
 
     options g_ether use_eem=0 dev_addr=aa:bb:cc:dd:ee:f1 host_addr=aa:bb:cc:dd:ee:f2
     
@@ -91,22 +91,22 @@ For exemple, mine is :
     /sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o wlp2s0 -j MASQUERADE
     echo 1 > /proc/sys/net/ipv4/ip_forward
     
-And ifconfig -a show :
+And `ifconfig -a` show :
 
 ![Capture d’écran_2022-12-05_14-22-19](https://user-images.githubusercontent.com/115619908/205647771-f5528805-8591-4f2b-890d-3fb05f38901b.png)
 
 
 
 # 6. Acces the key
-Connect the key via ssh :
+Connect the key via `ssh` :
 
     ssh usbarmory@10.0.0.1
     
-with the password "usbarmory".
+with the password `usbarmory`.
 
 If a message pop up, follow the instructions.
 
-Now on the USB, ping internet for confirm that the conf is working :
+Now on the USB, `ping` internet for confirm that the conf is working :
 
     ping 8.8.8.8
     
@@ -117,7 +117,7 @@ While on the Armory, do :
     
     ls /dev/mmcblk*
     
-You should have a result like "/dev/mmcblk1" so you can do :
+You should have a result like `/dev/mmcblk1` so you can do :
 
     fdisk /dev/mmcblk1
     
