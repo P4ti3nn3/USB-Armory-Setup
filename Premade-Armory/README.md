@@ -9,9 +9,13 @@ Uncompress it :
     sudo tar -xzvf <image.tar.gz>
 
 # 2. Get all prerequies
-On your device with `apt get`, get all this packages:
+On your device with `apt get`, get all this packages :
 
     bc binfmt-support bzip2 fakeroot gcc gcc-arm-linux-gnueabihf git gnupg make parted rsync qemu-user-static wget xz-utils zip debootstrap sudo dirmngr bison flex libssl-dev kmod
+    
+You can execute this command to get all packages :
+    
+    sudo apt install bc && sudo apt install binfmt-support && sudo apt install bzip2 && sudo apt install fakeroot && sudo apt install gcc && sudo apt install gcc-arm-linux-gnueabihf && sudo apt install git && sudo apt install gnupg && sudo apt install make && sudo apt install parted && sudo apt install rsync && sudo apt install qemu-user-static && sudo apt install wget && sudo apt install xz-utils && sudo apt install zip && sudo apt install debootstrap && sudo apt install sudo && sudo apt install dirmngr && sudo apt install bison && sudo apt install flex && sudo apt install libssl-dev && sudo apt install kmod
     
 # 3. Acces the USB Armory as a storage device
 ## A) Set the switch on uSd without any uSd card pluged in.
@@ -22,17 +26,17 @@ On your device with `apt get`, get all this packages:
 The [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases) file.
 
 ## C) Set up the armory-boot tool
-`git clone` the armory-boot tool and compil it:
+`git clone` the armory-boot tool and compil it :
 
     git clone https://github.com/usbarmory/armory-boot
     cd armory-boot && make armory-boot-usb
     
 ## D) Finish the process
-Move the .imx file into the armory-boot repository.
+Move the .imx file into the armory-boot repository :
 
     mv <file.imx> <armory-boot location>
 
-Execute the command below:
+Execute the command below :
 
     sudo armory-boot-usb -i armory-ums.imx
     
@@ -52,7 +56,7 @@ Set back the switch on the internal storage.
 ![internal](https://user-images.githubusercontent.com/115619908/207088122-b42e1c15-9156-49a5-be71-34e409257af8.png)
 
 # 5. Enable an internet access    
-You can now, in a terminal, execute this commands with your conf (do `ip addr` for information about your conf):
+You can now, in a terminal, execute this commands with your conf (do `ip addr` for information about your conf) :
 
     # bring the USB virtual Ethernet interface up
     /sbin/ip link set <ethernet interface of the USB> up
@@ -80,9 +84,9 @@ And ifconfig -a show :
 
 
 # 6. Acces the key
-Unplug and the plug the key.
+Unplug and then plug the key.
 
-Connect the key via ssh:
+Connect the key via ssh :
 
     ssh usbarmory@10.0.0.1
     
@@ -90,7 +94,7 @@ with the password "usbarmory".
 
 If a message pop up, follow the instructions.
 
-Now on the USB, ping internet for confirm that the conf is working:
+Now on the USB, ping internet for confirm that the conf is working :
 
     ping 8.8.8.8
     
