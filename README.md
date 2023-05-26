@@ -30,13 +30,13 @@ Copy this command in a terminal :
 The [armory-ums.imx](https://github.com/usbarmory/armory-ums/releases) file.
 
 ## C) Set up the armory-boot tool
-git clone the armory-boot tool and compil it :
+`git clone` the `armory-boot` tool and compil it :
 
     git clone https://github.com/usbarmory/armory-boot
     cd armory-boot && make armory-boot-usb
     
 ## D) Finish the process
-Move the .imx file into the armory-boot repository :
+Move the `.imx` file into the `armory-boot` repository :
 
     mv <file.imx> <armory-boot location>
 
