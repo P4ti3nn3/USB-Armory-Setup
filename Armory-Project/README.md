@@ -27,10 +27,10 @@ This configuration got the advantage to block any export from the main PC.
 # (V - Note and observation)
 **This part is dedicated to contain all advencements and observation concerning the project**
 
-When the Armory is considerated as a storage device, there is different type of behavior for the file:
+When the Armory is considerated as a storage device, there is different type of behavior for the file :
 
 ## 1 - Creating from host to /home
-Forbiden because in read only
+Forbiden because in read only.
 
 ## 2 - Deleting from host to /home
 `rm` work. From the host, the update is efficient directly but from the Armory, we need to wait for 30s.
@@ -63,7 +63,7 @@ An idea for bypass this is to create a repository on the Armory where after the 
 ### A) Access to USB files
 Create a new repository with `mkdir /home/usbarmory/usbContent`.
 
-Create a new script with `nano usbTransfer.sh` and add this content into it:
+Create a new script with `nano usbTransfer.sh` and add this content into it :
 
     #!/bin/bash
     /bin/cp -r /media/usb0 /home/usbarmory/usbContent/
@@ -71,7 +71,7 @@ Create a new script with `nano usbTransfer.sh` and add this content into it:
 Make it executable with `sudo chmod a+x usbTransfer.sh` and move it into the same repository as your USB Scanner.
 
 ### B) Creation of a main script for plug
-You can now create a main plug file with `nano mainPlug.sh` and add:
+You can now create a main plug file with `nano mainPlug.sh` and add :
 
     #!/bin/bash
     /bin/sleep 5 && /bin/bash /home/usbarmory/.usbPlug/scanUsb.sh && /bin/bash /home/usbarmory/.usbPlug/usbTransfer.sh
@@ -79,7 +79,7 @@ You can now create a main plug file with `nano mainPlug.sh` and add:
 Make it executable with `sudo chmod a+x mainPlug.sh`.
 
 ### C) Creation of a main script for unplug
-Now you can create a last script with `nano mainUnPlug.sh` and add:
+Now you can create a last script with `nano mainUnPlug.sh` and add :
 
     #!/bin/bash
     /bin/rm /home/usbarmory/usbContent/usb0
@@ -94,7 +94,7 @@ In `/etc/usbmount/mount.d` you can edit `10_plug` and replace the content with t
     #only the scan
     #/bin/bash /home/usbarmory/.usbPlug/scanUsb.sh
     
-In `/etc/usbmount/umount.d` you can add `10_unplug` and add this:
+In `/etc/usbmount/umount.d` you can add `10_unplug` and add this :
 
     #!/bin/bash
     #delete the usb content repository
