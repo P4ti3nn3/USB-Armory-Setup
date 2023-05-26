@@ -19,7 +19,7 @@ Uncompress it :
     
 Copy this command in a terminal :
 
-    sudo apt install bc & sudo apt install binfmt-support & sudo apt install bzip2 & sudo apt install fakeroot & sudo apt install gcc & sudo apt install gcc-arm-linux-gnueabihf & sudo apt install git & sudo apt install gnupg & sudo apt install make & sudo apt install parted & sudo apt install rsync & sudo apt install qemu-user-static & sudo apt install wget & sudo apt install xz-utils & sudo apt install zip & sudo apt install debootstrap & sudo apt install sudo & sudo apt install dirmngr & sudo apt install bison & sudo apt install flex & sudo apt install libssl-dev & sudo apt install kmod
+    sudo apt install bc && sudo apt install binfmt-support && sudo apt install bzip2 && sudo apt install fakeroot && sudo apt install gcc && sudo apt install gcc-arm-linux-gnueabihf && sudo apt install git && sudo apt install gnupg && sudo apt install make && sudo apt install parted && sudo apt install rsync && sudo apt install qemu-user-static && sudo apt install wget && sudo apt install xz-utils && sudo apt install zip && sudo apt install debootstrap && sudo apt install sudo && sudo apt install dirmngr && sudo apt install bison && sudo apt install flex && sudo apt install libssl-dev && sudo apt install kmod
     
 # 3. Acces the USB Armory as a storage device
 ## A) Set the switch on uSd without any uSd card pluged in.
