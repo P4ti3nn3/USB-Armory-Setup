@@ -171,6 +171,8 @@ Install the usb tools :
     apt install usbutils
     
 You're done for the basic configuration of the USB Armory.
+
+To improve your Armory you can configure some secured features by following [this part](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Secured-USB).
     
         
     
