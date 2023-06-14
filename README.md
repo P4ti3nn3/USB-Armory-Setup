@@ -3,6 +3,9 @@ This repository is an unofficial tutorial for helping to setup an [USB Armory Mk
 
 ![image](https://user-images.githubusercontent.com/115619908/207642407-f5ec6bdf-2e18-43d2-87e6-19d4cea08ea1.png)
 
+# Fully automatised configuration
+You can find [here](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Full-Auto-Conf) the tutorial to deploy your Armory by using a bash script. You just have to follow the few instructions but I encourage you to configure your own Armory with the following tuto for understand how the device works.
+
 # Premade configuration
 You can find [here](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Premade-Armory) the premade configuration. You just have to follow the few instructions but I encourage you to configure your own Armory with the following tuto for understand how the device works.
 
