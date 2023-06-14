@@ -2,7 +2,7 @@
 **In this part I give you a auto-configuration script for your Armory with all necessary setting for making a USB firewalling interface.**
 
 # 1. Download the auto-conf folder
-You can find the bash script [here](https://www.google.com) and you can download it.
+You can find the bash script [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/Auto-Conf) and you can download it.
 
 Uncompress it :
 
