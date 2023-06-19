@@ -42,7 +42,7 @@ If you want to understand how does it work, I invite you to explore the full tut
 
 # C++ Executable
 
-![image](https://github.com/P4ti3nn3/USB-Armory-Setup/assets/115619908/ae04d159-a98d-4e98-91da-975cdfbb764a)
+![image](https://github.com/P4ti3nn3/USB-Armory-Setup/assets/115619908/7771d236-e1d9-4e45-b42a-199d51f3046f)
 
 ## Before starting
 This part is based on the executbale from [this C++ code](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Full-Auto-Conf/Auto-conf.cpp) which call some specials commands contained in hidens folder. You can analyse the code and adapt it if you want or you can follow the steps below to get a full auto configuration. 
