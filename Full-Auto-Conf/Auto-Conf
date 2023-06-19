@@ -1,0 +1,78 @@
+#!/bin/bash
+RED='\033[0;31m'
+GRE='\033[0;32m'
+CAS='\033[0m'
+YEL='\033[1;33m'
+CYA='\033[0;36m'
+BLU='\033[0;34m'
+LIG='\033[0;37m'
+BRO='\033[0;33m'
+
+#script_path="${BASH_SOURCE[0]}"
+#if [[ "$script_path" != /* ]]; then
+#	script_path="$(pwd)/$script_path"
+#fi
+#PATH="${script_path%/*}"
+#ARMO_BOOT="${PATH}/.pkg/armory-boot/armory-boot-usb"
+#ARMO_UMS="${PATH}/.pkg/armory-boot/armory-ums.imx"
+#IMAGE="${PATH}/.pkg/armory-2023-05-24.raw"
+
+
+/bin/echo -e "${LIG}Welcome to the Auto-conf tool for USB Armory ${BRO}MK II${CAS} :"
+/bin/echo ""
+/bin/echo -e "${RED}!${CAS}If you're ${YEL}Root${CAS}, press ${GRE}<ENTER>${CAS}, else ${RED}<Ctrl + C>${CAS} :"
+read -n 1 -p "" maininput
+
+/bin/echo ""
+/bin/echo -e "${RED}!${CAS}Set the ${YEL}USB switch${CAS} on ${YEL}uSd mode${CAS}, then ${GRE}<ENTER>${CAS} :"
+read -n 1 -p "" maininput
+
+#################################################
+#as USB
+/bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
+/bin/echo -e "${BLU}Set the Armory as USB...${CAS}"
+sudo ./.pkg/armory-boot/armory-boot-usb -i ./.pkg/armory-boot/armory-ums.imx &
+#sudo "$ARMO_BOOT" -i "$ARMO_UMS" &
+
+wait
+
+/bin/sleep 5
+
+/bin/echo ""
+/bin/echo -e "${CYA}The Armory is set as USB.${CAS}"
+
+#################################################
+#load the image
+/bin/echo ""
+/bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
+/bin/echo -e "${BLU}Loading of the image, please wait...${CAS}"
+#sudo dd if="${IMAGE}" of=/dev/sdb bs=1M conv=fsync &
+sudo dd if=./.pkg/armory-2023-05-24.raw of=/dev/sdb bs=1M conv=fsync &
+wait
+/bin/echo ""
+/bin/echo -e "${CYA}Image loaded.${CAS}"
+
+#################################################
+#enable network config
+/bin/echo ""
+/bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
+/bin/echo -e "${RED}!${CAS}Set back the ${YEL}USB switch${CAS}, then ${GRE}<ENTER>${CAS} :"
+read -n 1 -p "" maininput
+
+/bin/echo -e "${BLU}Loading of the network configuration, please wait...${CAS}"
+
+/bin/sleep 30
+/sbin/ip link set enx1a5589a26942 up
+/sbin/ip addr add 10.0.0.2/24 dev enx1a5589a26942
+/sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o wlp2s0 -j MASQUERADE
+/bin/echo 1 > /proc/sys/net/ipv4/ip_forward
+
+/bin/echo ""
+/bin/echo -e "${CYA}Network configuration is set.${CAS}"
+/bin/echo ""
+/bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
+/bin/echo -e "${BLU}Enter the Armory code :${CAS}"
+#################################################
+#access to key
+/bin/sleep 10
+sudo ssh usbarmory@10.0.0.1
