@@ -3,6 +3,8 @@
 
 # Bash script
 
+![image](https://github.com/P4ti3nn3/USB-Armory-Setup/assets/115619908/341067da-87d6-447b-b63b-71363b460464)
+
 ## Before starting
 This part is based on [this bash script](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Full-Auto-Conf/Auto-Conf) which call some specials commands contained in hidens folder. You can analyse the script and adapt it if you want or you can follow the steps below to get a full auto configuration. 
 
@@ -39,6 +41,8 @@ If there is bad files, they will be put in `/home/usbarmory/suspicious` and you 
 If you want to understand how does it work, I invite you to explore the full tutorial on this Git starting by the [Secured USB part](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Secured-USB).
 
 # C++ Executable
+
+![image](https://github.com/P4ti3nn3/USB-Armory-Setup/assets/115619908/ae04d159-a98d-4e98-91da-975cdfbb764a)
 
 ## Before starting
 This part is based on the executbale from [this C++ code](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Full-Auto-Conf/Auto-conf.cpp) which call some specials commands contained in hidens folder. You can analyse the code and adapt it if you want or you can follow the steps below to get a full auto configuration. 
