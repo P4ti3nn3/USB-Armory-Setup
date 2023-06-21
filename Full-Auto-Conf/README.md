@@ -48,7 +48,7 @@ If you want to understand how does it work, I invite you to explore the full tut
 This part is based on the executbale from [this C++ code](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Full-Auto-Conf/Auto-conf.cpp) which call some specials commands contained in hidens folder. You can analyse the code and adapt it if you want or you can follow the steps below to get a full auto configuration. 
 
 ## 1. Download the auto-conf folder
-You can find the executable and the folders [here]() and you can download this.
+You can find the executable and the folders [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/Conf-C%2B%2B) and you can download this.
 
 Uncompress it :
 
