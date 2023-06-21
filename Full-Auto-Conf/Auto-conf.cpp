@@ -10,6 +10,7 @@
 #include <fstream>
 #include <thread>
 #include <cstring>
+#include <regex>
 //black        30         40
 //red          31         41
 //green        32         42
@@ -21,7 +22,7 @@
 
 using namespace std;
 
-//clean command execution
+//clean command execution/////////////////////
 void executeCommandAndWait(const std::string& command) {
     std::string sudoCommand = "sudo " + command;
 
@@ -39,6 +40,43 @@ void executeCommandAndWait(const std::string& command) {
     pclose(pipe);
 }
 
+//search for USB Armory/////////////////////
+string searchPeriph() {
+    std::string command = "sudo fdisk -l";
+    std::string result;
+
+    // Command and storage////////////////////
+    FILE* pipe = popen(command.c_str(), "r");
+    if (!pipe) {
+        std::cerr << "Error when command is executed : " << std::endl;
+        return "";
+    }
+
+    const int buffer_size = 128;
+    char buffer[buffer_size];
+    while (fgets(buffer, buffer_size, pipe) != nullptr) {
+        result += buffer;
+    }
+
+    pclose(pipe);
+
+    // Regex///////////////////////
+    std::regex regex("/dev/sd[b-z]");
+
+    // Search for regex////////////////////
+    std::smatch match;
+    if (std::regex_search(result, match, regex)) {
+        std::string device = match.str();
+        std::cout << "\33[1;32mDevice found : \33[0m" << device << std::endl;
+        std::string storedDevice = device;
+        return storedDevice;
+
+    } else {
+        std::cerr << "\33[1;31mDevice not found.\33[0m" << std::endl;
+    }
+    return "";
+}
+
 int main(void){
     //start of tool//////////////////////////
     char x;
@@ -54,20 +92,18 @@ int main(void){
     std::string asUsb = "./.pkg/armory-boot/armory-boot-usb -i ./.pkg/armory-boot/armory-ums.imx";
     executeCommandAndWait(asUsb); //command for as USB
     std::this_thread::sleep_for(std::chrono::seconds(5)); //wait till the end
-
-
-    
+    string sdx = searchPeriph();
     cout<<"\33[1;36mThe Armory is set as USB.\33[0m"<<endl<<endl;
 
     //load the image///////////////////////////
     std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     std::cout<<"\33[1;34mLoading of the image, please wait...\33[0m"<<endl;
-    std::string lImage = "dd if=./.pkg/armory-2023-05-24.raw of=/dev/sdb bs=1M conv=fsync";
+    std::string start = "dd if=./.pkg/armory-2023-05-24.raw of=";
+    std::string midle = sdx;
+    std::string end = " bs=1M conv=fsync";
+    std::string lImage = start+midle+end;
     executeCommandAndWait(lImage); //command to load image
     std::this_thread::sleep_for(std::chrono::seconds(5));
-
-
-
     cout<<"\33[1;36mImage loaded.\33[0m"<<endl<<endl;
 
     //enable internet access////////////////////////
@@ -76,12 +112,10 @@ int main(void){
     getchar();
     cout<<"\33[1;34mLoading of the network configuration, please wait...\33[0m"<<endl;
     system("/bin/sleep 30");
-
     system("/sbin/ip link set enx1a5589a26942 up");
     system("/sbin/ip addr add 10.0.0.2/24 dev enx1a5589a26942");
     system("/sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o wlp2s0 -j MASQUERADE");
     system("/bin/echo 1 > /proc/sys/net/ipv4/ip_forward");
-
     cout<<"\33[1;36mNetwork configuration set.\33[0m"<<endl<<endl;
 
     //access the key//////////////
