@@ -28,6 +28,15 @@ read -n 1 -p "" maininput
 read -n 1 -p "" maininput
 
 #################################################
+#packages needed
+/bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
+/bin/echo -e "${BLU}Install of needed packages...${CAS}"
+sudo apt install bc -y && sudo apt install binfmt-support -y && sudo apt install bzip2 -y && sudo apt install fakeroot -y && sudo apt install gcc -y && sudo apt install gcc-arm-linux-gnueabihf -y && sudo apt install git -y && sudo apt install gnupg -y && sudo apt install make -y && sudo apt install parted -y && sudo apt install rsync -y && sudo apt install qemu-user-static -y && sudo apt install wget -y && sudo apt install xz-utils -y && sudo apt install zip -y && sudo apt install debootstrap -y && sudo apt install sudo -y && sudo apt install dirmngr -y && sudo apt install bison -y && sudo apt install flex -y && sudo apt install libssl-dev -y && sudo apt install kmod -y
+wait
+/bin/echo ""
+/bin/echo -e "${CYA}The Armory is set as USB.${CAS}"
+
+#################################################
 #as USB
 /bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
 /bin/echo -e "${BLU}Set the Armory as USB...${CAS}"
@@ -47,7 +56,7 @@ wait
 /bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
 /bin/echo -e "${BLU}Loading of the image, please wait...${CAS}"
 #sudo dd if="${IMAGE}" of=/dev/sdb bs=1M conv=fsync &
-sudo dd if=./.pkg/armory-2023-05-24.raw of=/dev/sdb bs=1M conv=fsync &
+sudo pv -tpreb ./.pkg/armory-2023-05-24.raw | dd of=/dev/sdb bs=1M conv=fsync &
 wait
 /bin/echo ""
 /bin/echo -e "${CYA}Image loaded.${CAS}"
@@ -76,3 +85,6 @@ read -n 1 -p "" maininput
 #access to key
 /bin/sleep 10
 sudo ssh usbarmory@10.0.0.1
+
+#################################################
+#made by P4ti3nn3
