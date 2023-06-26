@@ -108,7 +108,8 @@ void neededPack(){
     std::string s = "apt install bison -y";
     std::string t = "apt install flex -y";
     std::string u = "apt install libssl-dev -y";
-    std::string v = "apt install kmod -y";   
+    std::string v = "apt install kmod -y";
+    std::string w = "apt install pv -y"; 
     executeCommandAndWait(a);
     std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
     executeCommandAndWait(b);
@@ -152,7 +153,9 @@ void neededPack(){
     executeCommandAndWait(u);
     std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
     executeCommandAndWait(v);
-    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end  
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(w);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
 }
 
 //////////////////////////////////////////////////////////////////
