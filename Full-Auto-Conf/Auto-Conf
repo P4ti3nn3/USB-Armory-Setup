@@ -31,7 +31,7 @@ read -n 1 -p "" maininput
 #packages needed
 /bin/echo -e "${LIG}------------------------------------------------------------------${CAS}"
 /bin/echo -e "${BLU}Install of needed packages...${CAS}"
-sudo apt install bc -y && sudo apt install binfmt-support -y && sudo apt install bzip2 -y && sudo apt install fakeroot -y && sudo apt install gcc -y && sudo apt install gcc-arm-linux-gnueabihf -y && sudo apt install git -y && sudo apt install gnupg -y && sudo apt install make -y && sudo apt install parted -y && sudo apt install rsync -y && sudo apt install qemu-user-static -y && sudo apt install wget -y && sudo apt install xz-utils -y && sudo apt install zip -y && sudo apt install debootstrap -y && sudo apt install sudo -y && sudo apt install dirmngr -y && sudo apt install bison -y && sudo apt install flex -y && sudo apt install libssl-dev -y && sudo apt install kmod -y
+sudo apt install pv -y && sudo apt install bc -y && sudo apt install binfmt-support -y && sudo apt install bzip2 -y && sudo apt install fakeroot -y && sudo apt install gcc -y && sudo apt install gcc-arm-linux-gnueabihf -y && sudo apt install git -y && sudo apt install gnupg -y && sudo apt install make -y && sudo apt install parted -y && sudo apt install rsync -y && sudo apt install qemu-user-static -y && sudo apt install wget -y && sudo apt install xz-utils -y && sudo apt install zip -y && sudo apt install debootstrap -y && sudo apt install sudo -y && sudo apt install dirmngr -y && sudo apt install bison -y && sudo apt install flex -y && sudo apt install libssl-dev -y && sudo apt install kmod -y
 wait
 /bin/echo ""
 /bin/echo -e "${CYA}The Armory is set as USB.${CAS}"
