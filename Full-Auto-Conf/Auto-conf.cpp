@@ -20,9 +20,12 @@
 //cyan         36         46
 //white        37         47
 
+
+
 using namespace std;
 
-//clean command execution/////////////////////
+//////////////////////////////////////////////////////////////////
+//clean command execution
 void executeCommandAndWait(const std::string& command) {
     std::string sudoCommand = "sudo " + command;
 
@@ -40,12 +43,14 @@ void executeCommandAndWait(const std::string& command) {
     pclose(pipe);
 }
 
-//search for USB Armory/////////////////////
+//////////////////////////////////////////////////////////////////
+//search for USB Armory
 string searchPeriph() {
     std::string command = "sudo fdisk -l";
     std::string result;
 
-    // Command and storage////////////////////
+    //////////////////////////////////////////////////////////////////
+    // Command and storage
     FILE* pipe = popen(command.c_str(), "r");
     if (!pipe) {
         std::cerr << "Error when command is executed : " << std::endl;
@@ -60,10 +65,12 @@ string searchPeriph() {
 
     pclose(pipe);
 
-    // Regex///////////////////////
+    //////////////////////////////////////////////////////////////////
+    // Regex
     std::regex regex("/dev/sd[b-z]");
 
-    // Search for regex////////////////////
+    //////////////////////////////////////////////////////////////////
+    // Search for regex
     std::smatch match;
     if (std::regex_search(result, match, regex)) {
         std::string device = match.str();
@@ -77,8 +84,82 @@ string searchPeriph() {
     return "";
 }
 
+//////////////////////////////////////////////////////////////////
+//install needed packages
+void neededPack(){
+    std::string a = "apt install bc -y";
+    std::string b = "apt install binfmt-support -y";
+    std::string c = "apt install bzip2 -y";
+    std::string d = "apt install fakeroot -y";
+    std::string e = "apt install gcc -y";
+    std::string f = "apt install gcc-arm-linux-gnueabihf -y";
+    std::string g = "apt install git -y";
+    std::string h = "apt install gnupg -y";
+    std::string i = "apt install make -y";
+    std::string j = "apt install parted -y";
+    std::string k = "apt install rsync -y";
+    std::string l = "apt install qemu-user-static -y";
+    std::string m = "apt install wget -y";
+    std::string n = "apt install xz-utils -y";
+    std::string o = "apt install zip -y";
+    std::string p = "apt install debootstrap -y";
+    std::string q = "apt install sudo -y";
+    std::string r = "apt install dirmngr -y";
+    std::string s = "apt install bison -y";
+    std::string t = "apt install flex -y";
+    std::string u = "apt install libssl-dev -y";
+    std::string v = "apt install kmod -y";   
+    executeCommandAndWait(a);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(b);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(c);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(d);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(e);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(f);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(g);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(h);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(i);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(j);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(k);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(l);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(m);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(n);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(o);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(p);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(q);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(r);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(s);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(t);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(u);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    executeCommandAndWait(v);
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end  
+}
+
+//////////////////////////////////////////////////////////////////
+//main part of the code
 int main(void){
-    //start of tool//////////////////////////
+    //////////////////////////////////////////////////////////////////
+    //start of tool
     char x;
     std::cout << "Welcome to the Auto-conf tool for USB Armory \033[1;43m\033[1;30mMK II\033[0m"<<endl<<endl;
     std::cout << "\033[1;31m!\33[0mIf you're \033[1;33mRoot\33[0m, press \033[1;32m<ENTER>\33[0m, else \033[1;31m<Ctrl + C>\33[0m :"<<endl;
@@ -86,7 +167,15 @@ int main(void){
     std::cout << "\033[1;31m!\33[0mSet the \033[1;33mUSB switch\33[0m on \033[1;33muSd mode\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
     getchar();
 
-    //as USB/////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    //install needed packages
+    std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+    std::cout<<"\33[1;34mInstall of needed packages ...\33[0m"<<endl;
+    neededPack();
+    cout<<"\33[1;36mAll packages are installed.\33[0m"<<endl<<endl;
+
+    //////////////////////////////////////////////////////////////////
+    //as USB
     std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     std::cout<<"\33[1;34mSet the Armory as USB...\33[0m"<<endl;
     std::string asUsb = "./.pkg/armory-boot/armory-boot-usb -i ./.pkg/armory-boot/armory-ums.imx";
@@ -95,10 +184,11 @@ int main(void){
     string sdx = searchPeriph();
     cout<<"\33[1;36mThe Armory is set as USB.\33[0m"<<endl<<endl;
 
-    //load the image///////////////////////////
+    //////////////////////////////////////////////////////////////////
+    //load the image
     std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     std::cout<<"\33[1;34mLoading of the image, please wait...\33[0m"<<endl;
-    std::string start = "dd if=./.pkg/armory-2023-05-24.raw of=";
+    std::string start = "pv -tpreb ./.pkg/armory-2023-05-24.raw | dd of=";
     std::string midle = sdx;
     std::string end = " bs=1M conv=fsync";
     std::string lImage = start+midle+end;
@@ -106,7 +196,8 @@ int main(void){
     std::this_thread::sleep_for(std::chrono::seconds(5));
     cout<<"\33[1;36mImage loaded.\33[0m"<<endl<<endl;
 
-    //enable internet access////////////////////////
+    //////////////////////////////////////////////////////////////////
+    //enable internet access
     cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     cout << "\033[1;31m!\33[0mSet back the \033[1;33mUSB switch\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
     getchar();
@@ -118,7 +209,8 @@ int main(void){
     system("/bin/echo 1 > /proc/sys/net/ipv4/ip_forward");
     cout<<"\33[1;36mNetwork configuration set.\33[0m"<<endl<<endl;
 
-    //access the key//////////////
+    //////////////////////////////////////////////////////////////////
+    //access the key
     cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     cout<<"\33[1;34mEnter the Armory code : \33[0m"<<endl;
     system("/bin/sleep 10");
@@ -126,4 +218,5 @@ int main(void){
 
 }
 
+//////////////////////////////////////////////////////////////////
 //made by P4ti3nn3
