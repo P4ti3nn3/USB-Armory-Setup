@@ -9,7 +9,7 @@
 This part is based on [this bash script](https://github.com/P4ti3nn3/USB-Armory-Setup/blob/main/Full-Auto-Conf/Auto-Conf) which call some specials commands contained in hidens folder. You can analyse the script and adapt it if you want or you can follow the steps below to get a full auto configuration. 
 
 ## 1. Download the auto-conf folder
-You can find the bash script and all folders [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/Auto-Conf) and you can download this.
+You can find the bash script and all folders [here](https://github.com/P4ti3nn3/USB-Armory-Setup/releases/tag/Conf-Bash) and you can download this.
 
 Uncompress it :
 
