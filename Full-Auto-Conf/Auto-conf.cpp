@@ -42,6 +42,8 @@ void executeCommandAndWait(const std::string& command) {
 
     pclose(pipe);
     std::cout<<"\033[1;32mOk!\33[0m"<<endl;
+
+    
 }
 
 //////////////////////////////////////////////////////////////////
@@ -110,7 +112,7 @@ void neededPack(){
     std::string t = "apt install flex -y";
     std::string u = "apt install libssl-dev -y";
     std::string v = "apt install kmod -y";
-    std::string w = "apt install pv -y"; 
+    std::string w = "apt install bc -y";   
     executeCommandAndWait(a);
     std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
     executeCommandAndWait(b);
@@ -156,7 +158,53 @@ void neededPack(){
     executeCommandAndWait(v);
     std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
     executeCommandAndWait(w);
-    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end   
+}
+
+//////////////////////////////////////////////////////////////////
+//as USB
+void funcUsb(){
+    std::string asUsb = "./.pkg/armory-boot/armory-boot-usb -i ./.pkg/armory-boot/armory-ums.imx";
+    executeCommandAndWait(asUsb); //command for as USB
+    std::this_thread::sleep_for(std::chrono::seconds(5)); //wait till the end
+}
+
+//////////////////////////////////////////////////////////////////
+//load the image
+void funcImage(string sdx){
+    std::string start = "pv -tpreb ./.pkg/armory-2023-05-24.raw | dd of=";
+    std::string midle = sdx;
+    std::string end = " bs=1M conv=fsync";
+    std::string lImage = start+midle+end;
+    executeCommandAndWait(lImage); //command to load image
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+}
+
+//////////////////////////////////////////////////////////////////
+//enable internet access
+void funcNetwork(){
+    std::string a = "/bin/sleep 30";
+    std::string b = "/sbin/ip link set enx1a5589a26942 up";
+    std::string c = "/sbin/ip addr add 10.0.0.2/24 dev enx1a5589a26942";
+    std::string d = "/sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o wlp2s0 -j MASQUERADE";
+    std::string e = "/bin/echo 1 > /proc/sys/net/ipv4/ip_forward";
+    executeCommandAndWait(a);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    executeCommandAndWait(b);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    executeCommandAndWait(c);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    executeCommandAndWait(d);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    executeCommandAndWait(e);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+}
+
+//////////////////////////////////////////////////////////////////
+//access the key
+void funcSsh(){
+    system("/bin/sleep 10");
+    system("ssh usbarmory@10.0.0.1");
 }
 
 //////////////////////////////////////////////////////////////////
@@ -182,9 +230,7 @@ int main(void){
     //as USB
     std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     std::cout<<"\33[1;34mSet the Armory as USB...\33[0m"<<endl;
-    std::string asUsb = "./.pkg/armory-boot/armory-boot-usb -i ./.pkg/armory-boot/armory-ums.imx";
-    executeCommandAndWait(asUsb); //command for as USB
-    std::this_thread::sleep_for(std::chrono::seconds(5)); //wait till the end
+    funcUsb();
     string sdx = searchPeriph();
     cout<<"\33[1;36mThe Armory is set as USB.\33[0m"<<endl<<endl;
 
@@ -192,12 +238,7 @@ int main(void){
     //load the image
     std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     std::cout<<"\33[1;34mLoading of the image, please wait...\33[0m"<<endl;
-    std::string start = "pv -tpreb ./.pkg/armory-2023-05-24.raw | dd of=";
-    std::string midle = sdx;
-    std::string end = " bs=1M conv=fsync";
-    std::string lImage = start+midle+end;
-    executeCommandAndWait(lImage); //command to load image
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    funcImage(sdx);
     cout<<"\33[1;36mImage loaded.\33[0m"<<endl<<endl;
 
     //////////////////////////////////////////////////////////////////
@@ -206,19 +247,14 @@ int main(void){
     cout << "\033[1;31m!\33[0mSet back the \033[1;33mUSB switch\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
     getchar();
     cout<<"\33[1;34mLoading of the network configuration, please wait...\33[0m"<<endl;
-    system("/bin/sleep 30");
-    system("/sbin/ip link set enx1a5589a26942 up");
-    system("/sbin/ip addr add 10.0.0.2/24 dev enx1a5589a26942");
-    system("/sbin/iptables -t nat -A POSTROUTING -s 10.0.0.1/32 -o wlp2s0 -j MASQUERADE");
-    system("/bin/echo 1 > /proc/sys/net/ipv4/ip_forward");
+    funcNetwork();
     cout<<"\33[1;36mNetwork configuration set.\33[0m"<<endl<<endl;
 
     //////////////////////////////////////////////////////////////////
     //access the key
     cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     cout<<"\33[1;34mEnter the Armory code : \33[0m"<<endl;
-    system("/bin/sleep 10");
-    system("ssh usbarmory@10.0.0.1");
+    funcSsh();
 
 }
 
