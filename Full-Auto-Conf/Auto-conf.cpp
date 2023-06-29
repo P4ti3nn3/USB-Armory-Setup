@@ -41,6 +41,7 @@ void executeCommandAndWait(const std::string& command) {
     }
 
     pclose(pipe);
+    std::cout<<"\033[1;32mOk!\33[0m"<<endl;
 }
 
 //////////////////////////////////////////////////////////////////
