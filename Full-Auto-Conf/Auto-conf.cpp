@@ -11,6 +11,8 @@
 #include <thread>
 #include <cstring>
 #include <regex>
+#include <sstream>
+#include <unistd.h>
 //black        30         40
 //red          31         41
 //green        32         42
@@ -44,6 +46,15 @@ void executeCommandAndWait(const std::string& command) {
     std::cout<<"\033[1;42m\033[1;37mOk!\33[0m"<<endl;
 
     
+}
+
+//////////////////////////////////////////////////////////////////
+//root ?
+string ruRoot(){
+    if (getuid() != 0){
+        return "no";
+    }
+    return "yes";
 }
 
 //////////////////////////////////////////////////////////////////
@@ -83,6 +94,7 @@ string searchPeriph() {
 
     } else {
         std::cerr << "\33[1;31mDevice not found.\33[0m" << std::endl;
+        return "error";
     }
     return "";
 }
@@ -114,7 +126,7 @@ void neededPack(){
     std::string v = "apt install kmod -y";
     std::string w = "apt install bc -y";
     std::string x = "apt update -y";
-    std::string y = "apt upgrade -y";
+    std::string y = "apt upgrade -y";   
     executeCommandAndWait(a);
     std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
     executeCommandAndWait(b);
@@ -164,7 +176,7 @@ void neededPack(){
     executeCommandAndWait(x);
     std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
     executeCommandAndWait(y);
-    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end
+    std::this_thread::sleep_for(std::chrono::seconds(1)); //wait till the end   
 }
 
 //////////////////////////////////////////////////////////////////
@@ -213,31 +225,50 @@ void funcSsh(){
     system("ssh usbarmory@10.0.0.1");
 }
 
+bool locate(const string& filename){
+    ifstream file(filename);
+    return file.good();
+}
+
 //////////////////////////////////////////////////////////////////
 //main part of the code
 int main(void){
     //////////////////////////////////////////////////////////////////
-    //start of tool
+    //start of tool 
     char x;
+    if (ruRoot()=="no"){
+        cout<<"\33[1;31mYou must be Root to run this tool.\33[0m"<<endl;
+        return 1;
+    }
     std::cout << "Welcome to the Auto-conf tool for USB Armory \033[1;43m\033[1;30mMK II\033[0m"<<endl<<endl;
-    std::cout << "\033[1;31m!\33[0mIf you're \033[1;33mRoot\33[0m, press \033[1;32m<ENTER>\33[0m, else \033[1;31m<Ctrl + C>\33[0m :"<<endl;
-    getchar();
     std::cout << "\033[1;31m!\33[0mSet the \033[1;33mUSB switch\33[0m on \033[1;33muSd mode\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
     getchar();
 
     //////////////////////////////////////////////////////////////////
     //install needed packages
     std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
-    std::cout<<"\33[1;34mInstall of needed packages ...\33[0m"<<endl;
-    neededPack();
-    cout<<"\33[1;36mAll packages are installed.\33[0m"<<endl<<endl;
+    std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? \033[1;32mYES(y)\33[0m, \33[1;31mNO(n)\33[0m  :"<<endl;
+    string response = "n";
+    cin>>response;
+    if (response!="y" && response !="YES" && response !="yes" && response !="Y" && response !="Yes" && response !=""){
+        std::cout<<"\33[1;34mInstall of needed packages ...\33[0m"<<endl;
+        neededPack();
+        cout<<"\33[1;36mAll packages are installed.\33[0m"<<endl<<endl;
+    }
 
     //////////////////////////////////////////////////////////////////
     //as USB
     std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     std::cout<<"\33[1;34mSet the Armory as USB...\33[0m"<<endl;
+    if (!locate("./.pkg/armory-boot/armory-boot-usb")){
+        cout<<"\33[1;31mPlease move to Auto conf folder.\33[0m"<<endl;
+        return 1;
+    }
     funcUsb();
     string sdx = searchPeriph();
+    if (sdx=="error"){
+        return 1;
+    }
     cout<<"\33[1;36mThe Armory is set as USB.\33[0m"<<endl<<endl;
 
     //////////////////////////////////////////////////////////////////
@@ -251,6 +282,7 @@ int main(void){
     //enable internet access
     cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
     cout << "\033[1;31m!\33[0mSet back the \033[1;33mUSB switch\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
+    getchar();
     getchar();
     cout<<"\33[1;34mLoading of the network configuration, please wait...\33[0m"<<endl;
     funcNetwork();
