@@ -26,6 +26,8 @@
 
 using namespace std;
 
+//////////////////////////////////////////////////////////////////
+//this work with executeCommandAndWait function
 bool commandErrorContainsFileError(const std::string& commandError) {
     // Vérifier si la sortie contient un message d'erreur de fichier manquant
     std::string errorMessage = "No such file or directory";
@@ -36,7 +38,9 @@ bool commandErrorContainsFileError(const std::string& commandError) {
 //clean command execution
 string executeCommandAndWait(const std::string& command, string search = "n") {
     std::string sudoCommand = "sudo " + command;
-    char buffer[128];    
+    char buffer[128];
+    //////////////////////////////////////////////////////////////////
+    //With verification    
     if(search=="y"){       
         FILE* pipe = popen(sudoCommand.c_str(), "r");
         if (!pipe) {
@@ -64,6 +68,8 @@ string executeCommandAndWait(const std::string& command, string search = "n") {
             return "";    
         }
     }
+    //////////////////////////////////////////////////////////////////
+    //Without verification
     else{
         FILE* pipe = popen(sudoCommand.c_str(), "r");
         if (!pipe) {
