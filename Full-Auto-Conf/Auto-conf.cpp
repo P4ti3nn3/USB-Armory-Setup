@@ -301,7 +301,7 @@ bool locate(const string& filename){
 
 //////////////////////////////////////////////////////////////////
 void source(){
-    string from = "made by \33[0;30mP\33[0;31m4\33[0;30mt\33[0;31mi\33[0;30m3\33[0;31mn\33[0;30mn\33[0;31me\33[0m";
+    string from = "made by \33[0;30mP\33[0;31m4\33[0;30mt\33[0;31mi\33[0;30m3\33[0;31mn\33[0;30mn\33[0;31m3\33[0m";
     cout<<from<<endl;
 }
 
