@@ -32,7 +32,7 @@ using namespace std;
 //CTRL+C gestion
 volatile sig_atomic_t signalReceived = 0;
 void handleSignal(int signal){
-    if (signal== SIGINT){
+    if (signal== SIGINT){ //if ctrl+c
         cout<<endl<<"\33[1;31mProgram was aborted.\33[0m" <<endl;
         exit(EXIT_SUCCESS);
     }
@@ -41,7 +41,6 @@ void handleSignal(int signal){
 //////////////////////////////////////////////////////////////////
 //this work with executeCommandAndWait function
 bool commandErrorContainsFileError(const std::string& commandError) {
-    // Vérifier si la sortie contient un message d'erreur de fichier manquant
     std::string errorMessage = "No such file or directory";
     return commandError.find(errorMessage) != std::string::npos;
 }
@@ -53,29 +52,29 @@ string executeCommandAndWait(const std::string& command, string search = "n", st
     char buffer[128];
     //////////////////////////////////////////////////////////////////
     //With verification    
-    if(search=="y"){       
-        FILE* pipe = popen(sudoCommand.c_str(), "r");
-        if (!pipe) {
+    if(search=="y"){
+        FILE* pipe = popen(sudoCommand.c_str(), "r"); //command executed
+        if (!pipe) { //if error in execution
             std::cerr << "Error when command is executed : " << command << std::endl;
             return "error";
         }
         char buffer[128];
         string result = "";
-        while (!feof(pipe)){
+        while (!feof(pipe)){ //loop to store the command output
             if(fgets(buffer, 128, pipe) != NULL){
                 result += buffer;
             }
         }
         pclose(pipe);
-        std::regex regex("no device found");
+        std::regex regex("no device found"); //use to make sure the device is ready
         std::smatch match;
-        if (std::regex_search(result, match, regex) && ready!="ok") {
+        if (std::regex_search(result, match, regex) && ready!="ok") { //is there a match with the regex ?
             std::cout << "\33[1;31mThe Armory is missing or not set as uSd.\33[0m" <<std::endl;
             return "error";
         }        
         //////////////////////////////////////////////////////////////////
         //aestetic
-        if(command!="clear"){
+        if(command!="clear"){ //use to not display ok when the screen is cleaned
             std::cout<<"\033[1;42m\033[1;37mOk!\33[0m"<<endl;
             return "";    
         }
@@ -83,8 +82,8 @@ string executeCommandAndWait(const std::string& command, string search = "n", st
     //////////////////////////////////////////////////////////////////
     //Without verification
     else{
-        FILE* pipe = popen(sudoCommand.c_str(), "r");
-        if (!pipe) {
+        FILE* pipe = popen(sudoCommand.c_str(), "r"); //command executed
+        if (!pipe) {//if error in executon
             std::cerr << "Error when command is executed : " << command << std::endl;
             return "error";
         }
@@ -93,11 +92,10 @@ string executeCommandAndWait(const std::string& command, string search = "n", st
             std::cout << buffer;  // display command output in realtime
         }
         pclose(pipe);
-
         //////////////////////////////////////////////////////////////////
         //aestetic
-        if(command!="clear"){
-            std::cout<<"\033[1;42m\033[1;37mOk!\33[0m"<<endl;    
+        if(command!="clear"){//use to not display ok when the screen is cleaned
+            std::cout<<"\033[1;42m\033[1;37mOk!\33[0m"<<endl;
         }
         return "";
     }
@@ -107,7 +105,7 @@ string executeCommandAndWait(const std::string& command, string search = "n", st
 //////////////////////////////////////////////////////////////////
 //root ?
 string ruRoot(){
-    if (getuid() != 0){
+    if (getuid() != 0){ //if user isn't root
         return "no";
     }
     return "yes";
@@ -116,34 +114,32 @@ string ruRoot(){
 //////////////////////////////////////////////////////////////////
 //search for USB Armory
 array<string, 4> searchPeriph(string display = "yes") {
-    std::string command = "sudo fdisk -l";
+    std::string command = "sudo fdisk -l"; //store the main command
     std::string result;
     array<string,4> storedResult;
     //////////////////////////////////////////////////////////////////
     // Command and storage
-    FILE* pipe = popen(command.c_str(), "r");
-    if (!pipe) {
+    FILE* pipe = popen(command.c_str(), "r"); //execute command
+    if (!pipe) {//if there is an error in execution
         std::cerr << "Error when command is executed : " << std::endl;
-        storedResult[2]="error";
+        storedResult[2]="error";//use to store error message
         return storedResult;
     }
-
     const int buffer_size = 128;
     char buffer[buffer_size];
-    while(fgets(buffer, buffer_size, pipe) != nullptr){
+    while(fgets(buffer, buffer_size, pipe) != nullptr){ //store the result of the execution
         result += buffer;
     }
-
     pclose(pipe);
-    regex deviceRegex("/dev/sd[b-z]");
-    regex modelRegex("USB armory Mk II");
+    regex deviceRegex("/dev/sd[b-z]"); //regex for armory name
+    regex modelRegex("USB armory Mk II"); //regex for armory type
     std::smatch deviceMatch;
     smatch modelMatch;
     string device;
-    if(regex_search(result, deviceMatch, deviceRegex)&&regex_search(result, modelMatch, modelRegex)){
+    if(regex_search(result, deviceMatch, deviceRegex)&&regex_search(result, modelMatch, modelRegex)){ //if there is a periph that match
         device = deviceMatch.str();
         string model = modelMatch.str();
-        if(display != "no"){
+        if(display != "no"){ //use to not display the result in specific case
             std::cout << "\33[1;32mDevice found : \33[0m" << device << std::endl;
         }        
         string storedDevice = device;
@@ -154,10 +150,10 @@ array<string, 4> searchPeriph(string display = "yes") {
         return storedResult;
     }
     else{
-        if(display!="no"){
+        if(display!="no"){ //use to not display the result in specific case
             std::cerr << "\33[1;31mDevice not found.\33[0m" << std::endl;
         }        
-        storedResult[2]="error";
+        storedResult[2]="error"; //store the error code 
         return storedResult;
     }
     return storedResult;
@@ -246,9 +242,9 @@ void neededPack(){
 //////////////////////////////////////////////////////////////////
 //as USB
 string funcUsb(string ready){
-    std::string asUsb = "./.pkg/armory-boot/armory-boot-usb -i ./.pkg/armory-boot/armory-ums.imx";
+    std::string asUsb = "./.pkg/armory-boot/armory-boot-usb -i ./.pkg/armory-boot/armory-ums.imx"; //store the command to execute
     if(executeCommandAndWait(asUsb,"y",ready)=="error"){
-        return "error";
+        return "error"; //in case of probleme
     } //command for as USB
     std::this_thread::sleep_for(std::chrono::seconds(5)); //wait till the end
     return "";
@@ -257,9 +253,9 @@ string funcUsb(string ready){
 //////////////////////////////////////////////////////////////////
 //load the image
 void funcImage(string sdx){
-    std::string start = "pv -tpreb ./.pkg/armory-2023-05-24.raw | dd of=";
-    std::string midle = sdx;
-    std::string end = " bs=1M conv=fsync";
+    std::string start = "pv -tpreb ./.pkg/armory-2023-05-24.raw | dd of="; //////
+    std::string midle = sdx;                                             ////creation of the command
+    std::string end = " bs=1M conv=fsync";                                 //////
     std::string lImage = start+midle+end;
     executeCommandAndWait(lImage); //command to load image
     std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -289,17 +285,18 @@ void funcNetwork(){
 //access the key
 void funcSsh(){
     system("/bin/sleep 10");
-    system("ssh usbarmory@10.0.0.1");
+    system("ssh usbarmory@10.0.0.1"); //connection to the armory
 }
 
 //////////////////////////////////////////////////////////////////
 //ensure the access to all needed file
 bool locate(const string& filename){
-    ifstream file(filename);
+    ifstream file(filename); //make sure that user is in the goog folder
     return file.good();
 }
 
 //////////////////////////////////////////////////////////////////
+//whomadethis
 void source(){
     string from = "made by \33[0;30mP\33[0;31m4\33[0;30mt\33[0;31mi\33[0;30m3\33[0;31mn\33[0;30mn\33[0;31m3\33[0m";
     cout<<from<<endl;
@@ -310,83 +307,89 @@ void source(){
 int main(void){
     //////////////////////////////////////////////////////////////////
     //start of tool
-    signal(SIGINT, handleSignal);    
+    signal(SIGINT, handleSignal); //manage the ctrl+c
     while (true){
         string clear = "clear";
-        executeCommandAndWait(clear);
+        executeCommandAndWait(clear); //clean the screen
         char x;
-        if (ruRoot()=="no"){
+        //make sure you're root
+        if (ruRoot()=="no"){ 
             cout<<"\33[1;31mYou must be Root to run this tool.\33[0m"<<endl;
             return 1;
         }
         std::cout<<"\33[1;35m##################################################################\33[0m"<<endl;
         std::cout << "Welcome to the Auto-conf tool for USB Armory \033[1;43m\033[1;30mMK II\033[0m"<<endl<<endl;
         std::cout << "\033[1;31m!\33[0mSet the \033[1;33mUSB switch\33[0m on \033[1;33muSd mode\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
-        getchar();
+        getchar(); //wait until the user <ENTER>
         //////////////////////////////////////////////////////////////////
         //install needed packages
         std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
-        std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? [\033[1;32mYES(y)\33[0m/\33[1;31mNO(n)\33[0m] : ";
+        std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? [\033[1;32mYES(y)\33[0m/\33[1;31mNO(n)\33[0;30m(default : NO)\33[0m] : ";
         string response = "n";
-        cin>>response;
+        cin>>response; //ask if all needed packages are installed
+        //infinite loop waiting for correct answer
         while(response!="y" && response !="YES" && response !="yes" && response !="Y" && response !="Yes" && response !="" && response !="NO" && response !="no" && response !="N" && response !="No" && response !="n"){
             if (response=="whomadethis"){
-                source();
+                source(); //display the source
             }
             std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? [\033[1;32mYES(y)\33[0m/\33[1;31mNO(n)\33[0m] : ";
             cin>>response;
         }
+        //install needed packages if it's wanted
         if (response!="y" && response !="YES" && response !="yes" && response !="Y" && response !="Yes" && response !="whomadethis"){
             std::cout<<"\33[1;34mInstall of needed packages ...\33[0m"<<endl;
-            neededPack();
+            neededPack(); //install packages
             cout<<"\33[1;36mAll packages are installed.\33[0m"<<endl<<endl;
             std::this_thread::sleep_for(std::chrono::seconds(3)); //wait till the end
             executeCommandAndWait(clear);
         }
         //////////////////////////////////////////////////////////////////
         //as USB
-        array<string, 4> periph = searchPeriph("no");
+        array<string, 4> periph = searchPeriph("no"); //use to make sure the "as usb" isn't done yet
         std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
         std::cout<<"\33[1;34mSet the Armory as USB...\33[0m"<<endl;
+        //use to make sure the user is in the good folder
         if (!locate("./.pkg/armory-boot/armory-boot-usb")){
             cout<<"\33[1;31mPlease move to Auto conf folder.\33[0m"<<endl;
             return 1;
         }
+        //use to make sure the "as usb" isn't done yet before the execution
         if(periph[3]!="ok"){
             if(funcUsb(periph[3])=="error"){
                 return 1;
             }            
         }        
-        periph = searchPeriph();
+        periph = searchPeriph(); //use to find the armory (if it's ready)
         if (periph[2]=="error"){
             return 1;
         }
-        string sdx = periph[0];
+        string sdx = periph[0]; //name of the armory
         cout<<"\33[1;36mThe Armory is set as USB.\33[0m"<<endl<<endl;
         //if(1==1){return 1;}        
         //////////////////////////////////////////////////////////////////
         //load the image
         std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
         std::cout<<"\33[1;34mLoading of the image, please wait...\33[0m"<<endl;
-        funcImage(sdx);
+        funcImage(sdx); //load the image on the armory
         cout<<"\33[1;36mImage loaded.\33[0m"<<endl<<endl;
         //////////////////////////////////////////////////////////////////
         //enable internet access
         cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
         cout << "\033[1;31m!\33[0mSet back the \033[1;33mUSB switch\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
-        getchar();
-        getchar();
+        getchar();//
+                  //use to wait until the switch is correctly set
+        getchar();//
         cout<<"\33[1;34mLoading of the network configuration, please wait...\33[0m"<<endl;
-        funcNetwork();
+        funcNetwork(); //load the network parameters
         cout<<"\33[1;36mNetwork configuration set.\33[0m"<<endl<<endl;
         std::this_thread::sleep_for(std::chrono::seconds(5)); //wait till the end
         //////////////////////////////////////////////////////////////////
         //access the key
-        executeCommandAndWait(clear);
+        executeCommandAndWait(clear); //clean the screen
         cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
         cout<<"Your \033[1;33mUSB Armory MKII \33[0m is now configured, you can access it and continue the \033[1;33mconfiguration\33[0m."<<endl;
         cout<<"\33[1;34mEnter the Armory code : \33[0m"<<endl;
-        funcSsh();
+        funcSsh(); //connect in SSH to the armory
         return 0;
     }
     return 0;
