@@ -1,5 +1,6 @@
 # Before starting
 **In this part I give you a [bash](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Full-Auto-Conf#bash-script) script and a [C++](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Full-Auto-Conf#c-executable) executable for your Armory with all necessary setting for making a USB firewalling interface.**
+**/!\ THE C++ EXECUTABLE IS MUCH MORE STABLE THAN THE BASH SCRIPT /!\**
 
 # Bash script
 
