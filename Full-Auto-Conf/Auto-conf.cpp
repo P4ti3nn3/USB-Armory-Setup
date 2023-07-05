@@ -1,3 +1,5 @@
+//////////////////////////////////////////////////////////////////
+//all includes
 #include <iostream>
 #include <string>
 #include <cstdio>
@@ -15,14 +17,20 @@
 #include <unistd.h>
 #include <csignal>
 #include <cstdlib>
-//black        30         40
-//red          31         41
-//green        32         42
-//yellow       33         43
-//blue         34         44
-//magenta      35         45
-//cyan         36         46
-//white        37         47
+
+/////////////////////////////////////
+//          tab of collor          //
+/////////////////////////////////////
+//           letter   background   //
+//black        30         40       //
+//red          31         41       //
+//green        32         42       //
+//yellow       33         43       //
+//blue         34         44       //
+//magenta      35         45       //
+//cyan         36         46       //
+//white        37         47       //
+/////////////////////////////////////
 
 
 
