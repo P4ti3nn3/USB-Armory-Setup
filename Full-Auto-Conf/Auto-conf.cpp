@@ -33,8 +33,9 @@
 /////////////////////////////////////
 
 
-
 using namespace std;
+
+string clear = "clear";
 
 //////////////////////////////////////////////////////////////////
 //CTRL+C gestion
@@ -311,13 +312,180 @@ void source(){
 }
 
 //////////////////////////////////////////////////////////////////
+//process for installation
+void installPack(){
+    std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+    std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? [\033[1;32mYES(y)\33[0m/\33[1;31mNO(n)\33[0m] : ";
+    string response = "n";
+    cin>>response; //ask if all needed packages are installed
+    //infinite loop waiting for correct answer
+    while(response!="y" && response !="YES" && response !="yes" && response !="Y" && response !="Yes" && response !="" && response !="NO" && response !="no" && response !="N" && response !="No" && response !="n"){
+        if (response=="whomadethis"){
+            source(); //display the source
+        }
+        std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? [\033[1;32mYES(y)\33[0m/\33[1;31mNO(n)\33[0m] : ";
+        cin>>response;
+    }
+    //install needed packages if it's wanted
+    if (response!="y" && response !="YES" && response !="yes" && response !="Y" && response !="Yes" && response !="whomadethis"){
+        std::cout<<"\33[1;34mInstall of needed packages ...\33[0m"<<endl;
+        neededPack(); //install packages
+        cout<<"\33[1;36mAll packages are installed.\33[0m"<<endl<<endl;
+        std::this_thread::sleep_for(std::chrono::seconds(3)); //wait till the end
+        executeCommandAndWait(clear);
+    }
+}
+
+//////////////////////////////////////////////////////////////////
+//complete configuration of the Armory
+int complete(){
+    //////////////////////////////////////////////////////////////////
+    //as USB
+    array<string, 4> periph = searchPeriph("no"); //use to make sure the "as usb" isn't done yet
+    std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+    std::cout<<"\33[1;34mSet the Armory as USB...\33[0m"<<endl;
+    //use to make sure the user is in the good folder
+    if (!locate("./.pkg/armory-boot/armory-boot-usb")){
+        cout<<"\33[1;31mPlease move to Auto conf folder.\33[0m"<<endl;
+        return 1; //1 if not in the folder
+    }
+    //use to make sure the "as usb" isn't done yet before the execution
+    if(periph[3]!="ok"){
+        if(funcUsb(periph[3])=="error"){ //remake an as usb if it's not done
+            return 3; //3 if there is a problem with the periph
+        }            
+    }        
+    periph = searchPeriph(); //use to find the armory (if it's ready)
+    if (periph[2]=="error"){
+        return 3; //3 if there is a problem with the periph
+    }
+    string sdx = periph[0]; //name of the armory
+    cout<<"\33[1;36mThe Armory is set as USB.\33[0m"<<endl<<endl;
+    //////////////////////////////////////////////////////////////////
+    //load the image
+    std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+    std::cout<<"\33[1;34mLoading of the image, please wait...\33[0m"<<endl;
+    funcImage(sdx); //load the image on the armory
+    cout<<"\33[1;36mImage loaded.\33[0m"<<endl<<endl;
+    //////////////////////////////////////////////////////////////////
+    //enable internet access
+    cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+    cout << "\033[1;31m!\33[0mSet back the \033[1;33mUSB switch\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
+    getchar();//
+              //use to wait until the switch is correctly set
+    getchar();//
+    cout<<"\33[1;34mLoading of the network configuration, please wait...\33[0m"<<endl;
+    funcNetwork(); //load the network parameters
+    cout<<"\33[1;36mNetwork configuration set.\33[0m"<<endl<<endl;
+    std::this_thread::sleep_for(std::chrono::seconds(5)); //wait till the end
+    return 0;
+}
+
+//////////////////////////////////////////////////////////////////
+//main menu and following
+int menu(){
+    cout<<endl;
+    cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+    cout << "\033[1;40m\033[1;33m[ Complete installation ]\33[0m";
+    cout<<" \033[1;30m<\033[1;37ma\033[1;30m>\033[0m        ";
+    cout << "\033[1;40m\033[1;33m[ Image installation ]\33[0m";
+    cout<<" \033[1;30m<\033[1;37mb\033[1;30m>\033[0m        ";
+    cout << "\033[1;40m\033[1;33m[ Network coniguration ]\33[0m";
+    cout<<" \033[1;30m<\033[1;37mc\033[1;30m>\033[0m        ";
+    cout << "\033[1;41m\033[1;37m[ EXIT ]\33[0m";
+    cout<<" \033[1;30m<\033[1;37md\033[1;30m>\033[0m";
+    cout<<endl<<endl;
+    cout<<"\033[1;34mChoice : \033[0m";
+    string s = "a";
+    cin>>s;
+    while(s != "a" && s != "b" && s != "c" && s != "d"){
+        std::cout << "\33[1;31mPlease choose a correct option.\33[0m"<<endl;
+        cout<<"\033[1;34mChoice : \033[0m";
+        cin>>s;
+    }    
+    //////////////////////////////////////////////////////////////////
+    //complete instalation
+    if (s == "a"){
+        int problem = complete();
+        if (problem == 1){
+            return 1;
+        }
+        if (problem == 3){
+            return 1;
+        }
+        return 31;
+    }
+    //////////////////////////////////////////////////////////////////
+    //only load image
+    if (s == "b"){
+        array<string, 4> periph = searchPeriph("no");
+        periph = searchPeriph(); //use to find the armory (if it's ready)
+        if (periph[2]=="error"){
+            return 1;
+        }
+        string sdx = periph[0]; //name of the armory
+        //////////////////////////////////////////////////////////////////
+        //load the image
+        std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+        std::cout<<"\33[1;34mLoading of the image, please wait...\33[0m"<<endl;
+        funcImage(sdx); //load the image on the armory
+        cout<<"\33[1;36mImage loaded.\33[0m"<<endl<<endl;
+        std::this_thread::sleep_for(std::chrono::seconds(10)); //wait till the end
+        return 0;
+    }
+    //////////////////////////////////////////////////////////////////
+    //only network configuration
+    if (s == "c"){
+        funcNetwork();
+        return 8;
+    }
+    //////////////////////////////////////////////////////////////////
+    //exit
+    if (s == "d"){
+        cout<<endl<<"\33[1;31mProgram was aborted.\33[0m" <<endl;
+        return 1;
+    }
+    return 0;         
+}
+
+//////////////////////////////////////////////////////////////////
+//access menu
+int menuAccess(){
+    executeCommandAndWait(clear); //clean the screen
+    cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+    cout<<"Your \033[1;33mUSB Armory MKII \33[0m is now configured, you can access it and continue the \033[1;33mconfiguration\33[0m."<<endl;
+    cout << "\033[1;40m\033[1;33m[ Access key ]\33[0m";
+    cout<<" \033[1;30m<\033[1;37ma\033[1;30m>\033[0m        ";
+    cout << "\033[1;41m\033[1;37m[ EXIT ]\33[0m";
+    cout<<" \033[1;30m<\033[1;37mb\033[1;30m>\033[0m";
+    cout<<endl<<endl;
+   cout<<"\033[1;34mChoice : \033[0m";
+    string r = "a";
+    cin>>r;
+    while(r != "a" && r != "b"){
+        std::cout << "\33[1;31mPlease choose a correct option.\33[0m"<<endl;
+        cout<<"\033[1;34mChoice : \033[0m";
+        cin>>r;
+    }
+    if (r=="a"){
+        cout<<"\33[1;34mEnter the Armory code : \33[0m"<<endl;
+        funcSsh(); //connect in SSH to the armory
+        return 0;
+    }
+    if (r=="b"){
+        cout<<endl<<"\33[1;31mProgram was aborted.\33[0m" <<endl;
+        return 1;
+    }
+    return 0;
+}
+
+//////////////////////////////////////////////////////////////////
 //main part of the code
 int main(void){
     //////////////////////////////////////////////////////////////////
     //start of tool
     signal(SIGINT, handleSignal); //manage the ctrl+c
     while (true){
-        string clear = "clear";
         executeCommandAndWait(clear); //clean the screen
         char x;
         //make sure you're root
@@ -331,74 +499,27 @@ int main(void){
         getchar(); //wait until the user <ENTER>
         //////////////////////////////////////////////////////////////////
         //install needed packages
-        std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
-        std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? [\033[1;32mYES(y)\33[0m/\33[1;31mNO(n)\33[0;30m(default : NO)\33[0m] : ";
-        string response = "n";
-        cin>>response; //ask if all needed packages are installed
-        //infinite loop waiting for correct answer
-        while(response!="y" && response !="YES" && response !="yes" && response !="Y" && response !="Yes" && response !="" && response !="NO" && response !="no" && response !="N" && response !="No" && response !="n"){
-            if (response=="whomadethis"){
-                source(); //display the source
-            }
-            std::cout << "\33[0mAre the \033[1;33mneeded packages\33[0m allready installed ? [\033[1;32mYES(y)\33[0m/\33[1;31mNO(n)\33[0m] : ";
-            cin>>response;
-        }
-        //install needed packages if it's wanted
-        if (response!="y" && response !="YES" && response !="yes" && response !="Y" && response !="Yes" && response !="whomadethis"){
-            std::cout<<"\33[1;34mInstall of needed packages ...\33[0m"<<endl;
-            neededPack(); //install packages
-            cout<<"\33[1;36mAll packages are installed.\33[0m"<<endl<<endl;
-            std::this_thread::sleep_for(std::chrono::seconds(3)); //wait till the end
-            executeCommandAndWait(clear);
-        }
+        installPack();
         //////////////////////////////////////////////////////////////////
-        //as USB
-        array<string, 4> periph = searchPeriph("no"); //use to make sure the "as usb" isn't done yet
-        std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
-        std::cout<<"\33[1;34mSet the Armory as USB...\33[0m"<<endl;
-        //use to make sure the user is in the good folder
-        if (!locate("./.pkg/armory-boot/armory-boot-usb")){
-            cout<<"\33[1;31mPlease move to Auto conf folder.\33[0m"<<endl;
+        //choice menu and following
+        int result = menu();
+        if (result == 1){
             return 1;
         }
-        //use to make sure the "as usb" isn't done yet before the execution
-        if(periph[3]!="ok"){
-            if(funcUsb(periph[3])=="error"){
-                return 1;
-            }            
-        }        
-        periph = searchPeriph(); //use to find the armory (if it's ready)
-        if (periph[2]=="error"){
-            return 1;
+        //display the message if it wasn't done
+        if(result != 31 && result != 8){
+            cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
+            cout << "\033[1;31m!\33[0mSet back the \033[1;33mUSB switch\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
+            getchar();//
+                    //use to wait until the switch is correctly set
+            getchar();//
         }
-        string sdx = periph[0]; //name of the armory
-        cout<<"\33[1;36mThe Armory is set as USB.\33[0m"<<endl<<endl;
-        //if(1==1){return 1;}        
-        //////////////////////////////////////////////////////////////////
-        //load the image
-        std::cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
-        std::cout<<"\33[1;34mLoading of the image, please wait...\33[0m"<<endl;
-        funcImage(sdx); //load the image on the armory
-        cout<<"\33[1;36mImage loaded.\33[0m"<<endl<<endl;
-        //////////////////////////////////////////////////////////////////
-        //enable internet access
-        cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
-        cout << "\033[1;31m!\33[0mSet back the \033[1;33mUSB switch\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
-        getchar();//
-                  //use to wait until the switch is correctly set
-        getchar();//
-        cout<<"\33[1;34mLoading of the network configuration, please wait...\33[0m"<<endl;
-        funcNetwork(); //load the network parameters
-        cout<<"\33[1;36mNetwork configuration set.\33[0m"<<endl<<endl;
-        std::this_thread::sleep_for(std::chrono::seconds(5)); //wait till the end
         //////////////////////////////////////////////////////////////////
         //access the key
-        executeCommandAndWait(clear); //clean the screen
-        cout<<"\33[1;30m------------------------------------------------------------------\33[0m"<<endl;
-        cout<<"Your \033[1;33mUSB Armory MKII \33[0m is now configured, you can access it and continue the \033[1;33mconfiguration\33[0m."<<endl;
-        cout<<"\33[1;34mEnter the Armory code : \33[0m"<<endl;
-        funcSsh(); //connect in SSH to the armory
-        return 0;
+        result = menuAccess();
+        if (result == 1){
+            return 1;
+        }                 
     }
     return 0;
 }
