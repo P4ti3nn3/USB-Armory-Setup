@@ -390,7 +390,7 @@ int menu(){
     cout<<" \033[1;30m<\033[1;37ma\033[1;30m>\033[0m        ";
     cout << "\033[1;40m\033[1;33m[ Image installation ]\33[0m";
     cout<<" \033[1;30m<\033[1;37mb\033[1;30m>\033[0m        ";
-    cout << "\033[1;40m\033[1;33m[ Network coniguration ]\33[0m";
+    cout << "\033[1;40m\033[1;33m[ Network configuration ]\33[0m";
     cout<<" \033[1;30m<\033[1;37mc\033[1;30m>\033[0m        ";
     cout << "\033[1;41m\033[1;37m[ EXIT ]\33[0m";
     cout<<" \033[1;30m<\033[1;37md\033[1;30m>\033[0m";
