@@ -486,13 +486,13 @@ int main(void){
     //start of tool
     signal(SIGINT, handleSignal); //manage the ctrl+c
     while (true){
-        executeCommandAndWait(clear); //clean the screen
         char x;
         //make sure you're root
         if (ruRoot()=="no"){ 
             cout<<"\33[1;31mYou must be Root to run this tool.\33[0m"<<endl;
             return 1;
         }
+        executeCommandAndWait(clear); //clean the screen
         std::cout<<"\33[1;35m##################################################################\33[0m"<<endl;
         std::cout << "Welcome to the Auto-conf tool for USB Armory \033[1;43m\033[1;30mMK II\033[0m"<<endl<<endl;
         std::cout << "\033[1;31m!\33[0mSet the \033[1;33mUSB switch\33[0m on \033[1;33muSd mode\33[0m, then, \033[1;32m<ENTER>\33[0m :"<<endl;
