@@ -160,7 +160,7 @@ Put this two files in `/var/lib/clamav` and then restart :
 # 4) Create a script
 On `/home/usbarmory` execute :
 
-    nano scanUsb.sh
+    nano .scanUsb.sh
   
 and then enter the following code :
 
@@ -203,6 +203,8 @@ Execute `chmod a+x scanUsb.sh` for giving the proper rights to the script and al
   
 # 5) Automatise the execution of the script when USB is plugged
 ## A) First way (best way)
+In `/home/usbarmory/`, do `mkdir .usbPlug` and `mv .scanUsb ./.usbPlug/`.
+
 In `/etc/usbmount/mount.d` do :
 
     nano 10_plug
@@ -210,9 +212,11 @@ In `/etc/usbmount/mount.d` do :
 and write :
 
 	#!/bin/bash
-	/bin/bash /home/usbarmory/.usbPlug/mainPlug.sh
+	/bin/bash /home/usbarmory/.usbPlug/.scanUsb
   
- Then reboot the Armory :
+Do `chmod a+x /etc/usbmount/mount.d/10_plug`.
+ 
+Then reboot the Armory :
  
     sudo reboot
 
