@@ -42,4 +42,10 @@ It will reboot the Armory so after the reboot, reconnect to it and do :
     cd /home/usbarmory/armory-utils
     ./step3
 
-It will take a few time
+It will take a few time but a menu will show up, the base configuration is `complete security` so select it, it will reboot the Armory so after the reboot, reconnect to it and do :
+
+    sudo su -
+    cd /home/usbarmory/.usbmountRepo
+    ./step4
+
+
