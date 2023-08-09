@@ -48,4 +48,4 @@ It will take a few time but a menu will show up, the base configuration is `comp
     cd /home/usbarmory/.usbmountRepo
     ./step4
 
-
+When it's over, the Armory is ready to use, you can test it by pluging a usb on it. 
