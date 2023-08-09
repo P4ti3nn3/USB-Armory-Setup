@@ -19,3 +19,27 @@ Then sellect `complete installation` for the classic configuration.
 Wait a few minutes and then you can follow the nexts steps.
 
 At the step `Loading of the armory utils`, if the message `connection refused` show up, re run the tool but select `Armory utils sharing` and answer `yes` to the message.
+
+You can now access the key for the next part.
+
+# Second part : secured configuration
+
+Now on the Armory do :
+
+    sudo su -
+    cd /home/usbarmory/armory-utils
+    ./step1
+
+It will reboot the Armory so after the reboot, reconnect to it and do :
+
+    sudo su -
+    cd /home/usbarmory/armory-utils
+    ./step2
+
+It will reboot the Armory so after the reboot, reconnect to it and do :
+
+    sudo su -
+    cd /home/usbarmory/armory-utils
+    ./step3
+
+It will take a few time
