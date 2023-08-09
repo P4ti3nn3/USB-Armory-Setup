@@ -17,3 +17,5 @@ If it's the first time you run the tool, answer `yes` to `Are the needed package
 Then sellect `complete installation` for the classic configuration.
 
 Wait a few minutes and then you can follow the nexts steps.
+
+At the step `Loading of the armory utils`, if the message `connection refused` show up, re run the tool but select `Armory utils sharing` and answer `yes` to the message.
