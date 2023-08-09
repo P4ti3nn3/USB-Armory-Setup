@@ -15,3 +15,5 @@ First, uncompress the tool and then as **root** move into the folder : `cd ./aut
 If it's the first time you run the tool, answer `yes` to `Are the needed packages allready installed ?`.
 
 Then sellect `complete installation` for the classic configuration.
+
+Wait a few minutes and then you can follow the nexts steps.
