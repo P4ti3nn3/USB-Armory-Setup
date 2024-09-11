@@ -1,5 +1,7 @@
 # Before starting
 This part is the adaptation of the Armory one to make it compliance with any Debian system and transform it into a white station (Station Blanche).
+![image](https://github.com/user-attachments/assets/076e4b23-d4a3-486c-8d4c-f631ce42fd22)
+
 
 # Prerequisite
 First of all, on terminal we need to create a repository dedicated to the White Guardian :
