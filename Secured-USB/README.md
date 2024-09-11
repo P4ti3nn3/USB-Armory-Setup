@@ -15,3 +15,5 @@ This [method](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Secured-USB
 
 ## 3) Universal configuration
 This [method](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Wh1t3Gu4rd14n) is dedicated to configure a white station (station blanche) such as the one of the Armory but on any other linux system such as a virtual machine or a Raspberry Pi for exemple.
+
+![image](https://github.com/user-attachments/assets/6a40ff21-b793-4b9b-ad0a-fb3dafdc9b0d)
