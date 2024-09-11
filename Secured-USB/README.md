@@ -12,3 +12,6 @@ This [method](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Secured-USB
 This [method](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Secured-USB/2-USBGuard) use the free app [USBGuard](https://usbguard.github.io/) for allow only known USB device.
 
 ![image](https://user-images.githubusercontent.com/115619908/207056529-e7d4d679-0818-4c84-bdfd-49d316f817b7.png)
+
+## 3) Universal configuration
+This [method](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Wh1t3Gu4rd14n) is dedicated to configure a white station (station blanche) such as the one of the Armory but on any other linux system such as a virtual machine or a Raspberry Pi for exemple.
