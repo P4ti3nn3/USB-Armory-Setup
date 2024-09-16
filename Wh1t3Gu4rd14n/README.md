@@ -86,13 +86,13 @@ and then enter the following code :
    	if [ "$content" != "$(ls -l /home/user/white/guardian/suspicious)" ]; then
 	   	/bin/echo "	          /analyse completed\          
 	
-	   	##############>Result<################
-	   	#                                    #
-	   	#            /!\WARNING/!\           #
-	   	#     Suspicious file(s) detected    #
-	   	#  check /home/usbarmory/suspicious  #
-	   	#                                    #
-	   	######################################" | wall
+	   	###############>Result<#################
+	   	#                                      #
+	   	#             /!\WARNING/!\            #
+	   	#      Suspicious file(s) detected     #
+	   	# check /home/user/guardian/suspicious #
+	   	#                                      #
+	   	########################################" | wall
 
    	else
 	   	/bin/echo "               /analyse completed\          
