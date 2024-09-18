@@ -81,7 +81,7 @@ and then enter the following code :
 	   	#                ...                 #
 	   	######################################" | wall
    	content=$(ls -l /home/user/white/guardian/suspicious)
-   	/bin/clamscan -i -r -v --log=/home/user/guardian/logguardian.txt /media/usb*/
+   	/bin/clamscan -i -r -v --log=/home/user/guardian/logguardian.txt --move=/home/user/whiteguardian/suspicious /media/usb*/
 	python3 /home/user/guardian/logjson.py
 
    	if [ "$content" != "$(ls -l /home/user/white/guardian/suspicious)" ]; then
