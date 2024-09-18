@@ -81,7 +81,8 @@ and then enter the following code :
 	   	#                ...                 #
 	   	######################################" | wall
    	content=$(ls -l /home/user/white/guardian/suspicious)
-   	/bin/clamscan -i -r -v --move=/home/user/whiteguardian/suspicious /media/usb*/ | tee /home/user/clamscan.log
+   	/bin/clamscan -i -r -v --log=/home/user/guardian/logguardian.txt /media/usb*/
+	python3 /home/user/guardian/logjson.py
 
    	if [ "$content" != "$(ls -l /home/user/white/guardian/suspicious)" ]; then
 	   	/bin/echo "	          /analyse completed\          
@@ -107,7 +108,28 @@ and then enter the following code :
 
   
 Execute `chmod a+x .scanUsb.sh` for giving the proper rights to the script and also `mkdir /home/user/whiteguardian/suspicious`.
-  
+
+You also need to create a script to parse the logs `nano /home/user/guardian/logjson.py` :
+
+	import json
+ 	def parse_clamscan_log(file_path):
+    		results = []
+    		with open(file_path, 'r') as file:
+        		for line in file:
+                        	if "FOUND" in line or "OK" in line:
+                			file_path, status = line.split(": ")
+                			results.append({
+                    				"file": file_path,
+                    				"status": status.strip()
+                			})
+    		return results
+	log_file_path = '/home/user/guardian/logguardian.txt'
+	results = parse_clamscan_log(log_file_path)
+	json_file_path = 'rapport_clamav.json'
+	with open(json_file_path, 'w') as json_file:
+    		json.dump(results, json_file, indent=4)
+
+
 # 4) Automatise the execution of the script when USB is plugged
 In `/home/user/whiteguardian`, do `mkdir .usbPlug` and `mv .scanUsb ./.usbPlug/`.
 
