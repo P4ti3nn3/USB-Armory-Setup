@@ -8,7 +8,7 @@ You must have done [this](https://github.com/P4ti3nn3/USB-Armory-Setup) part bef
 # I - Requirements
 **Sanity check** : The USB Armory shall verify if the USB plugged isn't infected.
 
-**File transfer** : The USB Armory shall transfer file to the computer to witch it's plugged.
+**File transfer** : The USB Armory shall transfer files to the computer to wich it's plugged.
 
 **Traffic control** : The USB Armory shall block all forbiden download from the computer.
 
