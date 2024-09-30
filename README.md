@@ -6,7 +6,7 @@ This repository is an unofficial tutorial for helping to setup an [USB Armory Mk
 # Fully automatised configuration
 You can find [here](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Auto-conf) the tutorial to deploy your Armory by using a tool. You just have to follow the few instructions but I encourage you to configure your own Armory with the following tuto for understand how the device works.
 
-# Premade configuration
+# Premade configuration (Not stable)
 You can find [here](https://github.com/P4ti3nn3/USB-Armory-Setup/tree/main/Premade-Armory) the premade configuration. You just have to follow the few instructions but I encourage you to configure your own Armory with the following tuto for understand how the device works.
 
 # 1. Download the image
