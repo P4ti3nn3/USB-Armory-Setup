@@ -76,7 +76,7 @@ And then in the terminal :
 
 
 # Prerequisite part II
-Another way to process is to install the [usbmount](https://github.com/rbrito/usbmount) tool :
+The best way to proceed is to install the [usbmount](https://github.com/rbrito/usbmount) tool :
 
     apt install git
     apt install debhelper build-essential
