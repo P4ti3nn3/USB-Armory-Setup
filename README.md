@@ -73,7 +73,7 @@ In the file `/etc/modprobe.d/usbarmory.conf`, add the line :
 
     options g_ether use_eem=0 dev_addr=aa:bb:cc:dd:ee:f1 host_addr=aa:bb:cc:dd:ee:f2
     
-You can now, in a terminal, execute this commands with your conf (do ip addr for information about your conf) :
+You can now, in a terminal, execute this commands with your conf (do `ip addr` for information about your conf) :
 
     # bring the USB virtual Ethernet interface up
     /sbin/ip link set <ethernet interface of the USB> up
